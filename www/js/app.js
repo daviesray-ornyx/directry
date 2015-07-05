@@ -1,0 +1,83 @@
+// Ionic Starter App
+
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+angular.module('directry', ['ionic', 'directory.controllers', 'directory.services'])
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if(window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+  });
+})
+
+.config(function($stateProvider, $urlRouterProvider){
+  $stateProvider
+    .state('tab', {
+      url: "/tab",
+      abstract: true,
+      templateUrl: "templates/tabs.html"
+    })
+    .state('tab.all', {
+      url: '/all',
+      views: {
+        'tab-all': {
+          templateUrl: 'templates/tab-all.html',
+          controller: 'DirectoryAllCtrl'
+        }
+      }
+    })
+    .state('tab.all-detail', {
+      url: '/all/:detailId',
+      views: {
+        'tab-all': {
+          templateUrl: 'templates/tab-all-detail.html',
+          controller: 'DirectoryAllDetailCtrl'
+        }
+      }
+    })
+    .state('tab.emergency', {
+      url: '/emergency',
+      views: {
+        'tab-emergency': {
+          templateUrl: 'templates/tab-emergency.html',
+          controller: 'DirectoryEmergencyCtrl'
+        }
+      }
+    })
+    .state('tab.emergency-detail', {
+      url: '/emergency/:detailId',
+      views: {
+        'tab-emergency': {
+          templateUrl: 'templates/tab-emergency-detail.html',
+          controller: 'DirectoryEmergencyDetailCtrl'
+        }
+      }
+    })
+    .state('tab.offices', {
+      url: '/offices',
+      views: {
+        'tab-offices': {
+          templateUrl: 'templates/tab-offices.html',
+          controller: 'DirectoryOfficesCtrl'
+        }
+      }
+    })
+    .state('tab.offices-detail', {
+      url: '/offices/:detailId',
+      views: {
+        'tab-offices': {
+          templateUrl: 'templates/tab-offices-detail.html',
+          controller: 'DirectoryOfficesDetailCtrl'
+        }
+      }
+    })
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/tab/emergency');
+})

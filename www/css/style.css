@@ -1,0 +1,70 @@
+/* Empty. Add your own CSS if you like */
+.emergenct-tab-icon {
+  font-size: 64px;
+  color : red;
+}
+
+.saved-tab-icon {
+  font-size: 64px;
+  color : green;
+}
+
+.offices-tab-icon {
+  font-size: 64px;
+  color : blue;
+}
+
+.page-header{
+  background-color: #0D6759 !important;
+  height: 50px !important;
+  border-top: 5px solid #0D6759 !important;
+  border-bottom: none;
+  width: 100% !important;
+}
+.page-nav-title{
+  height: 50px !important;
+  padding-top: 4px !important;
+  padding-bottom: 0px !important;
+  background: transparent;
+  color: #FFF !important;
+  border: none !important;
+  text-align: left;
+  width: 100% !important;
+}
+
+.white-text{
+  color: #FFF !important;
+}
+
+.background-theme-color{
+  background-color: #0D6759 !important;
+}
+
+.title-image {
+  margin-top: 0px;
+  height: 15px;
+}
+
+.tab-bar-section{
+  margin-top: 3px !important;
+  background-color: #0D6759 !important;
+}
+
+.tab-item{
+  background-color: #0D6759 !important;
+  color: #FFF !important;
+  border-bottom-color: #0D6759 !important;
+  opacity: 1 !important;
+}
+
+.tab-item.active, .tab-item.activated, .tab-item-active {
+  background-color: #0D6759 !important;
+  color: #FFF !important;
+  border-bottom-color: #FFF !important;
+  opacity: 1 !important;
+}
+
+.page-footer{
+  background: transparent;
+  color: #FFF !important;
+}

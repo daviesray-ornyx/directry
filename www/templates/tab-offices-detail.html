@@ -1,0 +1,25 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="item page-nav-title">
+      <span class="white-text" style="padding-left: 1px !important;"></span>
+    </div>
+  </ion-nav-title>
+  <ion-content class="padding">
+    <div class="item item-avatar">
+      <img src="{{picUrl}}">
+      <h2><strong>{{contact.name}}</strong></h2>
+      <p>Address</p>
+    </div>
+    <ion-list>
+      <div class="item item-divider">
+        CONTACTS <span class="badge badge-assertive background-theme-color">{{contactCount}}</span>
+      </div>
+      <ion-item class="item item-icon-left" ng-repeat="detail in contactDetails" ng-click="triggerAction({{contact}})" >
+        <i class="icon ion-android-contact"></i>
+        <h2>
+          {{detail.value}}
+        </h2>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
