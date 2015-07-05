@@ -1,6 +1,6 @@
 angular.module('directory.services',[])
   .factory('API', function($rootScope, $http, $ionicLoading, $window){
-    var base = "http://localhost:9804";
+    var base = "http://http://directroy.azurewebsites.net";
 
     $rootScope.show = function(text){
       $rootScope.loading = $ionicLoading.show({
