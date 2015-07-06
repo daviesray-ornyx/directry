@@ -55,7 +55,9 @@ angular.module('directory.controllers', ['directory.services'])
     $scope.search();
   }
 
-  $scope.fullProfileImagePath = $rootScope.fullProfileImagePath(name);
+  $scope.fullProfileImagePath = function(name){
+    $rootScope.fullProfileImagePath(name);
+  }
 
   $scope.showDetail = function(contact){
     console.log(contact);
@@ -148,7 +150,9 @@ angular.module('directory.controllers', ['directory.services'])
     $scope.search();
   }
 
-  $scope.fullProfileImagePath = $rootScope.fullProfileImagePath(name);
+  $scope.fullProfileImagePath = function(name){
+    $rootScope.fullProfileImagePath(name);
+  }
 
   $scope.showDetail = function(contact){
     console.log(contact);
@@ -241,7 +245,9 @@ angular.module('directory.controllers', ['directory.services'])
     $scope.search();
   }
 
-  $scope.fullProfileImagePath = $rootScope.fullProfileImagePath(name);
+  $scope.fullProfileImagePath = function(name){
+    $rootScope.fullProfileImagePath(name);
+  }
 
   $scope.showDetail = function(contact){
     console.log(contact);
