@@ -1,6 +1,6 @@
 angular.module('directory.services',[])
   .factory('API', function($rootScope, $http, $ionicLoading, $window){
-    var base = "http://directry-serv.azurewebsites.net";
+    var base = "http://localhost:9804";
 
     $rootScope.show = function(text){
       $rootScope.loading = $ionicLoading.show({
@@ -37,7 +37,7 @@ angular.module('directory.services',[])
           return "./img/business_placeholder.jpg";
         }
         else{
-          return base + "/uploads/images/profile_pics/" + name;
+          return "http://localhost:9804/uploads/images/profile_pics/" + name;
         }
       }
 

@@ -55,7 +55,15 @@ angular.module('directory.controllers', ['directory.services'])
     $scope.search();
   }
 
-  $scope.fullProfileImagePath = $rootScope.fullProfileImagePath(name){;
+  $scope.fullProfileImagePath = function(name){
+    if(!name){
+      //No image, use a default image
+      return "./img/business_placeholder.jpg";
+    }
+    else{
+      return "http://localhost:9804/uploads/images/profile_pics/" + name;
+    }
+  }
 
   $scope.showDetail = function(contact){
     console.log(contact);
@@ -148,7 +156,15 @@ angular.module('directory.controllers', ['directory.services'])
     $scope.search();
   }
 
-  $scope.fullProfileImagePath = $rootScope.fullProfileImagePath(name);
+  $scope.fullProfileImagePath = function(name){
+    if(!name){
+      //No image, use a default image
+      return "./img/business_placeholder.jpg";
+    }
+    else{
+      return "http://localhost:9804/uploads/images/profile_pics/" + name;
+    }
+  }
 
   $scope.showDetail = function(contact){
     console.log(contact);
@@ -251,7 +267,14 @@ angular.module('directory.controllers', ['directory.services'])
     }
   }
 
-  $scope.showDetail = $rootScope.fullProfileImagePath(contact);
+  $scope.showDetail = function(contact){
+    console.log(contact);
+    // set current contact detail in rootScopr
+    var c = contact;
+    $rootScope.setCurrentContactDetail(c);
+    $window.location.href = ("#/tab/offices/contact._id");
+  }
+
 })
 .controller('DirectoryOfficesDetailCtrl', function($rootScope, $scope, API, $window){
   $scope.contact = $rootScope.getCurrentContactDetail();
