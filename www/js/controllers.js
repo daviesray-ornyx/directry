@@ -55,15 +55,7 @@ angular.module('directory.controllers', ['directory.services'])
     $scope.search();
   }
 
-  $scope.fullProfileImagePath = function(name){
-    if(!name){
-      //No image, use a default image
-      return "./img/business_placeholder.jpg";
-    }
-    else{
-      return "http://localhost:9804/uploads/images/profile_pics/" + name;
-    }
-  }
+  $scope.fullProfileImagePath = $rootScope.fullProfileImagePath(name);
 
   $scope.showDetail = function(contact){
     console.log(contact);
@@ -156,15 +148,7 @@ angular.module('directory.controllers', ['directory.services'])
     $scope.search();
   }
 
-  $scope.fullProfileImagePath = function(name){
-    if(!name){
-      //No image, use a default image
-      return "./img/business_placeholder.jpg";
-    }
-    else{
-      return "http://localhost:9804/uploads/images/profile_pics/" + name;
-    }
-  }
+  $scope.fullProfileImagePath = $rootScope.fullProfileImagePath(name);
 
   $scope.showDetail = function(contact){
     console.log(contact);
@@ -257,15 +241,7 @@ angular.module('directory.controllers', ['directory.services'])
     $scope.search();
   }
 
-  $scope.fullProfileImagePath = function(name){
-    if(!name){
-      //No image, use a default image
-      return "./img/business_placeholder.jpg";
-    }
-    else{
-      return "http://localhost:9804/uploads/images/profile_pics/" + name;
-    }
-  }
+  $scope.fullProfileImagePath = $rootScope.fullProfileImagePath(name);
 
   $scope.showDetail = function(contact){
     console.log(contact);
