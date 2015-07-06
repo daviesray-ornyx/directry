@@ -56,7 +56,7 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.fullProfileImagePath = function(name){
-    $rootScope.fullProfileImagePath(name);
+    return $rootScope.fullProfileImagePath(name);
   }
 
   $scope.showDetail = function(contact){
@@ -151,7 +151,7 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.fullProfileImagePath = function(name){
-    $rootScope.fullProfileImagePath(name);
+    return $rootScope.fullProfileImagePath(name);
   }
 
   $scope.showDetail = function(contact){
@@ -246,7 +246,7 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.fullProfileImagePath = function(name){
-    $rootScope.fullProfileImagePath(name);
+    return $rootScope.fullProfileImagePath(name);
   }
 
   $scope.showDetail = function(contact){
