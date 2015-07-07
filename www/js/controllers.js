@@ -3,7 +3,7 @@ angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   $scope.limit = 25;
   $scope.stillMoreContacts = true;
-  $scope.loadButtonText = "Load more";
+  $scope.loadButtonText = " Load ";
   // Bootstraping app
   $scope.searchTerm = "";   // this is the search term
   $scope.directory = API.getAllContactProfiles();
@@ -34,7 +34,7 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.setLoadButtonText = function(){
-    $scope.loadButtonText = $scope.stillMoreContacts ? "Load More" : "No more contacts";
+    $scope.loadButtonText = $scope.stillMoreContacts ? " Load " : "No more contacts";
   }
 
   $scope.loadMore = function(){
@@ -128,7 +128,7 @@ angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryEmergencyCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   $scope.limit = 25;
   $scope.stillMoreContacts = true;
-  $scope.loadButtonText = "Load more";
+  $scope.loadButtonText = " Load ";
 
   $scope.searchTerm = "";   // this is the search term
   $scope.directory = API.getEmergencyContactProfiles();
@@ -159,7 +159,7 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.setLoadButtonText = function(){
-    $scope.loadButtonText = $scope.stillMoreContacts ? "Load More" : "No more contacts";
+    $scope.loadButtonText = $scope.stillMoreContacts ? " Load " : "No more contacts";
   }
 
   $scope.loadMore = function(){
@@ -257,7 +257,7 @@ angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryOfficesCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   $scope.limit = 25;
   $scope.stillMoreContacts = true;
-  $scope.loadButtonText = "Load more";
+  $scope.loadButtonText = " Load ";
 
   $scope.searchTerm = "";   // this is the search term
   $scope.directory = API.getOfficeContactProfiles();
@@ -288,7 +288,7 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.setLoadButtonText = function(){
-    $scope.loadButtonText = $scope.stillMoreContacts ? "Load More" : "No more contacts";
+    $scope.loadButtonText = $scope.stillMoreContacts ? " Load " : "No more contacts";
   }
 
   $scope.loadMore = function(){

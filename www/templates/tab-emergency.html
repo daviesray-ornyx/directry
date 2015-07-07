@@ -25,9 +25,9 @@
         </h2>
         <p>4049-4344, Nairobi </p>
       </ion-item>
-      <ion-item class="button button-full button-stable center-div" ng-show="{{stillMoreContacts}}" ng-click="loadMore()">
-        <span>{{loadButtonText}}</span>
-      </ion-item>
+      <div class="center-div " ng-show="{{stillMoreContacts}}" style="margin:10px !important; padding:10px !mportant;" ng-click="loadMore()">
+        <span class="white-text background-theme-color" style="border: solid 5px #0D6759;">{{loadButtonText}}</span>
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>

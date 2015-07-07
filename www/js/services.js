@@ -74,7 +74,7 @@ angular.module('directory.services',[])
         emergencyLoaded = status;
       },
       getEmergencyContactProfiles : function(){
-        return emergencyLoaded;
+        return emergencyContactProfiles;
       },
       setEmergencyContactProfiles : function(list){
         emergencyContactProfiles = list;
