@@ -32,6 +32,10 @@
   width: 100% !important;
 }
 
+.tab-nav{
+  background-color: #0D6759 !important;
+}
+
 .white-text{
   color: #FFF !important;
 }
@@ -62,6 +66,17 @@
   color: #FFF !important;
   border-bottom-color: #FFF !important;
   opacity: 1 !important;
+}
+
+.center-div{
+  text-align: center;
+}
+
+.button.button-icon.input-button {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  color: #bbb;
 }
 
 .page-footer{

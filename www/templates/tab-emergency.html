@@ -5,25 +5,28 @@
     </div>
   </ion-nav-title>
   <ion-content>
+    <div class="item item-input-inset" style="border: none !important;">
+      <label class="item-input-wrapper" style="background-color: #FFF !important;">
+        <i class="icon ion-search placeholder-icon"></i>
+        <div>
+          <input type="text" placeholder="search" ng-model="searchTerm">
+        </div>
+      </label>
+      <i class="icon ion-close-round input-button" ng-if="searchTerm.length" ng-click="clearSearch()" style="float:right !important;"></i>
+      <button class="button button-small background-theme-color" ng-click="search()" ng-hide="true">
+        <strong class="white-text">Search</strong>
+      </button>
+    </div>
     <ion-list>
-      <div class="item item-divider">
-        CONTACTS
-      </div>
-      <div class="item item-input-inset">
-        <label class="item-input-wrapper">
-          <i class="icon ion-search placeholder-icon"></i>
-          <input type="text" placeholder="search" ng-model="name">
-        </label>
-        <button class="button button-small" ng-click="search()">
-          Search
-        </button>
-      </div>
-      <ion-item class="item-avatar" ng-repeat="contact in directory" ng-click="showDetail({{ contact }})" >
+      <ion-item class="item-avatar" ng-repeat="contact in directory | filter:searchTerm" ng-click="showDetail({{contact}})" >
         <img ng-src="{{fullProfileImagePath(contact.pic)}}" style="width: 64px; height: 64px">
         <h2>
           <strong>{{contact.name}}</strong>
         </h2>
         <p>4049-4344, Nairobi </p>
+      </ion-item>
+      <ion-item class="button button-full button-stable center-div" ng-show="{{stillMoreContacts}}" ng-click="loadMore()">
+        <span>{{loadButtonText}}</span>
       </ion-item>
     </ion-list>
   </ion-content>

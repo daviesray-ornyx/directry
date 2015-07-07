@@ -1,15 +1,21 @@
 angular.module('directory.services',[])
-  .factory('API', function($rootScope, $http, $ionicLoading, $window){
-    var base = "http://directry-serv.azurewebsites.net";
+  .factory('API', function($rootScope, $http, $ionicLoading, $window){  // this makes lists and other variables accessible to controllers
+    var base = "http://directry-serv.azurewebsites.net";    // production
+    //var base = "http://localhost:9804";    // development
+
+    var allLoaded = false;
+    var allContactProfiles = [];
+
+    var emergencyLoaded = false;
+    var emergencyContactProfiles = [];
+
+    var officeLoaded = false;
+    var officeContactProfiles = [];
 
     $rootScope.show = function(text){
-      $rootScope.loading = $ionicLoading.show({
-        content: text ? text : 'Loading',
-        animation : 'fade-in',
-        showBackdrop: true,
-        maxWidth: 200,
-        showDelay:0
-      })
+      $ionicLoading.show({
+        template: text
+      });
     };
 
     $rootScope.hide = function(){
@@ -31,15 +37,15 @@ angular.module('directory.services',[])
       return JSON.parse($window.localStorage['currentContactDetail'] || '{}');
     }
 
-      $rootScope.fullProfileImagePath = function(name){
-        if(!name){
-          //No image, use a default image
-          return "./img/business_placeholder.jpg";
-        }
-        else{
-          return base + "/uploads/images/profile_pics/" + name;
-        }
+    $rootScope.fullProfileImagePath = function(name){
+      if(!name){
+        //No image, use a default image
+        return "./img/business_placeholder.jpg";
       }
+      else{
+        return base + "/uploads/images/profile_pics/" + name;
+      }
+    }
 
     return {
       listDirectory : function(params){
@@ -47,6 +53,44 @@ angular.module('directory.services',[])
                     method: 'GET',
                     params: params
         });
+      },
+      getAllLoadStatus : function(){
+        return allLoaded;
+      },
+      setAllLoadStatus : function(status){
+        allLoaded = status;
+      },
+      getAllContactProfiles : function(){
+        return allContactProfiles;
+      },
+      setAllContactProfiles : function(list){
+        allContactProfiles = list;
+      },
+
+      getEmergencyLoadStatus : function(){
+        return emergencyLoaded;
+      },
+      setEmergencyLoadStatus : function(status){
+        emergencyLoaded = status;
+      },
+      getEmergencyContactProfiles : function(){
+        return emergencyLoaded;
+      },
+      setEmergencyContactProfiles : function(list){
+        emergencyContactProfiles = list;
+      },
+
+      getOfficeLoadStatus : function(){
+        return officeLoaded;
+      },
+      setOfficeLoadStatus : function(status){
+        officeLoaded = status;
+      },
+      getOfficeContactProfiles : function(){
+        return emergencyContactProfiles;
+      },
+      setOfficeContactProfiles : function(list){
+        officeContactProfiles = list;
       },
       loadUserContacts : function(params){
         return $http.get(base + '/api/v1/directry/contact/list/', {
