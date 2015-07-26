@@ -15,15 +15,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
         if(window.plugins && window.plugins.AdMob) {
-            //var admob_key = device.platform == "Android" ? "ca-app-pub-6699142760491850/5045443529" : "ca-app-pub-6699142760491850/5045443529";
-            var admob_key = "";
-            if ( /(android)/i.test(navigator.userAgent) ) {
-                // for android
-                adMobId = "ca-app-pub-6699142760491850/5045443529";
-            } else if( /(ipod|iphone|ipad)/i.test(navigator.userAgent) ) {
-                // for ios
-                adMobId = "ca-app-pub-6699142760491850/2033101527";
-            }
+            var admob_key = device.platform == "Android" ? "ca-app-pub-6699142760491850/5045443529" : "ca-app-pub-6699142760491850/5045443529";
             var admob = window.plugins.AdMob;
             admob.createBannerView(
                 {
