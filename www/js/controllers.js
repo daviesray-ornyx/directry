@@ -141,9 +141,9 @@ angular.module('directory.controllers', ['directory.services'])
     $rootScope.show("Loading...");
     API.listDirectory({
       name : $scope.searchTerm,
-      category:"emergency",
+      category:"Emergency",
       skip: 0,
-      limit: 25
+      limit: 15
       })
       .success(function(list){
         $scope.stillMoreContacts = list.length == 0 ? false : true;
@@ -166,12 +166,12 @@ angular.module('directory.controllers', ['directory.services'])
     // get current count
     $rootScope.show("Loading...");
     var count = this.directory.length;
-    var limit = this.limit;
+    var limit = 15;
     API.listDirectory({
       name : this.searchTerm,
-      category: "emergency",
+      category: "Emergency",
       skip: count,
-      limit: limit
+      limit: 15
     })
     .success(function(list){
       $scope.stillMoreContacts = list.length == 0 ? false : true;
@@ -192,7 +192,7 @@ angular.module('directory.controllers', ['directory.services'])
     API.listDirectory({
       name : this.searchTerm,
       skip: 0,
-      limit: this.limit
+      limit: 15
       })
       .success(function(list){
         $scope.stillMoreContacts = list.length == 0 ? false : true;
@@ -221,7 +221,7 @@ angular.module('directory.controllers', ['directory.services'])
     $window.location.href = ("#/tab/emergency/contact._id");
   }
 
-  if(!API.getAllLoadStatus() || $scope.directory.length == 0){  // checks if status has been loaded before
+  if(!API.getEmergencyLoadStatus() || $scope.directory.length == 0){  // checks if status has been loaded before
     // initial load... No history... Do first load
     $scope.load();
   }
@@ -270,9 +270,9 @@ angular.module('directory.controllers', ['directory.services'])
     $rootScope.show("Loading...");
     API.listDirectory({
       name : "",
-      category:"office",
+      category:"Office",
       skip: 0,
-      limit: 25
+      limit: 15
       })
       .success(function(list){
         $scope.stillMoreContacts = list.length == 0 ? false : true;
@@ -298,9 +298,9 @@ angular.module('directory.controllers', ['directory.services'])
     var limit = this.limit;
     API.listDirectory({
       name : this.searchTerm,
-      category: "office",
+      category: "Office",
       skip: count,
-      limit: limit
+      limit: 15
     })
     .success(function(list){
       $scope.stillMoreContacts = list.length == 0 ? false : true;
@@ -321,7 +321,7 @@ angular.module('directory.controllers', ['directory.services'])
     API.listDirectory({
       name : this.searchTerm,
       skip: 0,
-      limit: this.limit
+      limit: 15
       })
       .success(function(list){
         $scope.stillMoreContacts = list.length == 0 ? false : true;
@@ -350,7 +350,7 @@ angular.module('directory.controllers', ['directory.services'])
     $window.location.href = ("#/tab/offices/contact._id");
   }
 
-  if(!API.getAllLoadStatus() || $scope.directory.length == 0){  // checks if status has been loaded before
+  if(!API.getOfficeLoadStatus() || $scope.directory.length == 0){  // checks if status has been loaded before
     // initial load... No history... Do first load
     $scope.load();
   }

@@ -87,7 +87,7 @@ angular.module('directory.services',[])
         officeLoaded = status;
       },
       getOfficeContactProfiles : function(){
-        return emergencyContactProfiles;
+        return officeContactProfiles;
       },
       setOfficeContactProfiles : function(list){
         officeContactProfiles = list;
