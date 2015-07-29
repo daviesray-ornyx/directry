@@ -40,7 +40,7 @@ angular.module('directory.services',[])
     $rootScope.fullProfileImagePath = function(name){
       if(!name){
         //No image, use a default image
-        return "./img/business_placeholder.jpg";
+        return "./img/business_placeholder.png";
       }
       else{
         return base + "/uploads/images/profile_pics/" + name;
