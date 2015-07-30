@@ -1,58 +1,38 @@
 angular.module('directory.controllers', ['directory.services'])
 
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
-  $scope.limit = 25;
-  $scope.stillMoreContacts = true;
-  $scope.loadButtonText = " Load ";
+
   // Bootstraping app
-  $scope.searchTerm = "";   // this is the search term
-  $scope.directory = API.getAllContactProfiles();
+  $scope.searchTerm = {};   // this is the search term
+  $scope.directory = [];
+  $scope.showSearchPrompt = function(){
+    return $scope.directory.length > 0 ? false : true;
+  }
+
+  $scope.updateDate = $rootScope.getUpdateDate();
+
+
   if($ionicHistory.backView()){ // Not initial load..
     $ionicHistory.clearHistory(); // Clear history  // rest of things remain same for now
   }
 
-  $scope.load = function(){
-    $rootScope.show("Loading...")
-    API.listDirectory({
-      name : "",
-      category: "",
-      skip: 0,
-      limit: $scope.limit
-      })
-      .success(function(list){
-        $scope.stillMoreContacts = list.length == 0 ? false : true;
-        $scope.setLoadButtonText();
-        $scope.directory = list;
-        API.setAllContactProfiles(list); // set services value
-        API.setAllLoadStatus(true);
-        $rootScope.hide();
-      })
-      .error(function(err){
-        console.log(err);
-        $rootScope.hide();
-      })
+  $scope.searchAll = function(){
+    // get search term
+    $rootScope.show("Loading...");
+    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+    $rootScope.hide();
   }
 
-  $scope.setLoadButtonText = function(){
-    $scope.loadButtonText = $scope.stillMoreContacts ? " Load " : "No more contacts";
-  }
-
-  $scope.loadMore = function(){
-    // get current count
-    $rootScope.show("Loading...")
-    var count = this.directory.length;
-    var limit = this.limit;
-    API.listDirectory({
-      name : this.searchTerm,
-      skip: count,
-      limit: limit
-    })
-    .success(function(list){
-      $scope.stillMoreContacts = list.length == 0 ? false : true;
-      $scope.directory = $scope.directory.concat(list);
-      API.setAllContactProfiles($scope.directory); // set services value
-      $scope.setLoadButtonText();
-      API.setAllLoadStatus(true);
+  $scope.updateDirectory = function(){
+    $rootScope.show("Updating Directory from Server...")
+    API.updateDirectory({})
+    .success(function(dirObject){
+      $rootScope.setProfileList(dirObject.profileList);
+      $rootScope.setContactList(dirObject.contactsList);
+      // Set last updated
+      $rootScope.setUpdateDate ();
+      $scope.updateDate = $rootScope.getUpdateDate();
+      // Hide loading indicator
       $rootScope.hide();
     })
     .error(function(err){
@@ -61,28 +41,9 @@ angular.module('directory.controllers', ['directory.services'])
     })
   }
 
-  $scope.search = function(){
-    $rootScope.show("Loading...");
-    API.listDirectory({
-      name : this.searchTerm,
-      skip: 0,
-      limit: this.limit
-      })
-      .success(function(list){
-        $scope.stillMoreContacts = list.length == 0 ? false : true;
-        $scope.directory = list;
-        API.setAllContactProfiles(list); // set services value
-        $rootScope.hide();
-      })
-      .error(function(err){
-        console.log(err);
-        $rootScope.hide();
-      })
-  }
-
-  $scope.clearSearch = function(){
-    this.searchTerm = "";
-    $scope.load();
+  $scope.resetSearchAll = function(sTerm){
+    $scope.directory = [];
+    $scope.searchTerm.text = "";
   }
 
   $scope.fullProfileImagePath = function(name){
@@ -93,11 +54,6 @@ angular.module('directory.controllers', ['directory.services'])
     // set current contact detail in rootScope
     $rootScope.setCurrentContactDetail(contact);
     $window.location.href = ("#/tab/all/contact._id");
-  }
-
-  if(!API.getAllLoadStatus() || $scope.directory.length == 0){  // checks if status has been loaded before
-    // initial load... No history... Do first load
-    $scope.load();
   }
 
 })
@@ -126,59 +82,37 @@ angular.module('directory.controllers', ['directory.services'])
   }
 })
 .controller('DirectoryEmergencyCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
-  $scope.limit = 25;
-  $scope.stillMoreContacts = true;
-  $scope.loadButtonText = " Load ";
+  // Bootstraping app
+  $scope.searchTerm = {};   // this is the search term
+  $scope.directory = [];
 
-  $scope.searchTerm = "";   // this is the search term
-  $scope.directory = API.getEmergencyContactProfiles();
+  $scope.updateDate = $rootScope.getUpdateDate();
+
+  $scope.showSearchPrompt = function(){
+    return $scope.directory.length > 0 ? false : true;
+  }
 
   if($ionicHistory.backView()){ // Not initial load..
     $ionicHistory.clearHistory(); // Clear history  // rest of things remain same for now
   }
 
-  $scope.load = function(){
+  $scope.searchAll = function(){
+    // get search term
     $rootScope.show("Loading...");
-    API.listDirectory({
-      name : $scope.searchTerm,
-      category:"Emergency",
-      skip: 0,
-      limit: 15
-      })
-      .success(function(list){
-        $scope.stillMoreContacts = list.length == 0 ? false : true;
-        $scope.directory = list;
-        API.setEmergencyContactProfiles(list); // set services value
-        API.setEmergencyLoadStatus(true);
-        $rootScope.hide();
-      })
-      .error(function(err){
-        console.log(err);
-        $rootScope.hide();
-      })
+    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+    $rootScope.hide();
   }
 
-  $scope.setLoadButtonText = function(){
-    $scope.loadButtonText = $scope.stillMoreContacts ? " Load " : "No more contacts";
-  }
-
-  $scope.loadMore = function(){
-    // get current count
-    $rootScope.show("Loading...");
-    var count = this.directory.length;
-    var limit = 15;
-    API.listDirectory({
-      name : this.searchTerm,
-      category: "Emergency",
-      skip: count,
-      limit: 15
-    })
-    .success(function(list){
-      $scope.stillMoreContacts = list.length == 0 ? false : true;
-      $scope.directory = $scope.directory.concat(list);
-      API.setEmergencyContactProfiles($scope.directory); // set services value
-      $scope.setLoadButtonText();
-      API.setEmergencyLoadStatus(true);
+  $scope.updateDirectory = function(){
+    $rootScope.show("Updating Directory from Server...")
+    API.updateDirectory({})
+    .success(function(dirObject){
+      $rootScope.setProfileList(dirObject.profileList);
+      $rootScope.setContactList(dirObject.contactsList);
+      // Set last updated
+      $rootScope.setUpdateDate ();
+      $scope.updateDate = $rootScope.getUpdateDate();
+      // Hide loading indicator
       $rootScope.hide();
     })
     .error(function(err){
@@ -187,28 +121,9 @@ angular.module('directory.controllers', ['directory.services'])
     })
   }
 
-  $scope.search = function(){
-    $rootScope.show("Loading...");
-    API.listDirectory({
-      name : this.searchTerm,
-      skip: 0,
-      limit: 15
-      })
-      .success(function(list){
-        $scope.stillMoreContacts = list.length == 0 ? false : true;
-        $scope.directory = list;
-        API.setEmergencyContactProfiles(list); // set services value
-        $rootScope.hide();
-      })
-      .error(function(err){
-        console.log(err);
-        $rootScope.hide();
-      })
-  }
-
-  $scope.clearSearch = function(){
-    this.searchTerm = "";
-    $scope.load();
+  $scope.resetSearchAll = function(sTerm){
+    $scope.directory = [];
+    $scope.searchTerm.text = "";
   }
 
   $scope.fullProfileImagePath = function(name){
@@ -218,12 +133,7 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.showDetail = function(contact){
     // set current contact detail in rootScope
     $rootScope.setCurrentContactDetail(contact);
-    $window.location.href = ("#/tab/emergency/contact._id");
-  }
-
-  if(!API.getEmergencyLoadStatus() || $scope.directory.length == 0){  // checks if status has been loaded before
-    // initial load... No history... Do first load
-    $scope.load();
+    $window.location.href = ("#/tab/all/contact._id");
   }
 
 })
@@ -255,59 +165,35 @@ angular.module('directory.controllers', ['directory.services'])
   }
 })
 .controller('DirectoryOfficesCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
-  $scope.limit = 25;
-  $scope.stillMoreContacts = true;
-  $scope.loadButtonText = " Load ";
-
-  $scope.searchTerm = "";   // this is the search term
-  $scope.directory = API.getOfficeContactProfiles();
+  $scope.searchTerm = {};   // this is the search term
+  $scope.directory = [];
+  $scope.updateDate = $rootScope.getUpdateDate();
 
   if($ionicHistory.backView()){ // Not initial load..
     $ionicHistory.clearHistory(); // Clear history  // rest of things remain same for now
   }
 
-  $scope.load = function(){
+  $scope.showSearchPrompt = function(){
+    return $scope.directory.length > 0 ? false : true;
+  }
+  
+  $scope.searchAll = function(){
+    // get search term
     $rootScope.show("Loading...");
-    API.listDirectory({
-      name : "",
-      category:"Office",
-      skip: 0,
-      limit: 15
-      })
-      .success(function(list){
-        $scope.stillMoreContacts = list.length == 0 ? false : true;
-        $scope.directory = list;
-        API.setOfficeContactProfiles(list); // set services value
-        API.setOfficeLoadStatus(true);
-        $rootScope.hide();
-      })
-      .error(function(err){
-        console.log(err);
-        $rootScope.hide();
-      })
+    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+    $rootScope.hide();
   }
 
-  $scope.setLoadButtonText = function(){
-    $scope.loadButtonText = $scope.stillMoreContacts ? " Load " : "No more contacts";
-  }
-
-  $scope.loadMore = function(){
-    // get current count
-    $rootScope.show("Loading...");
-    var count = this.directory.length;
-    var limit = this.limit;
-    API.listDirectory({
-      name : this.searchTerm,
-      category: "Office",
-      skip: count,
-      limit: 15
-    })
-    .success(function(list){
-      $scope.stillMoreContacts = list.length == 0 ? false : true;
-      $scope.directory = $scope.directory.concat(list);
-      API.setOfficeContactProfiles($scope.directory); // set services value
-      $scope.setLoadButtonText();
-      API.setOfficeLoadStatus(true);
+  $scope.updateDirectory = function(){
+    $rootScope.show("Updating Directory from Server...")
+    API.updateDirectory({})
+    .success(function(dirObject){
+      $rootScope.setProfileList(dirObject.profileList);
+      $rootScope.setContactList(dirObject.contactsList);
+      // Set last updated
+      $rootScope.setUpdateDate ();
+      $scope.updateDate = $rootScope.getUpdateDate();
+      // Hide loading indicator
       $rootScope.hide();
     })
     .error(function(err){
@@ -316,28 +202,9 @@ angular.module('directory.controllers', ['directory.services'])
     })
   }
 
-  $scope.search = function(){
-    $rootScope.show("Loading...");
-    API.listDirectory({
-      name : this.searchTerm,
-      skip: 0,
-      limit: 15
-      })
-      .success(function(list){
-        $scope.stillMoreContacts = list.length == 0 ? false : true;
-        $scope.directory = list;
-        API.setOfficeContactProfiles(list); // set services value
-        $rootScope.hide();
-      })
-      .error(function(err){
-        console.log(err);
-        $rootScope.hide();
-      })
-  }
-
-  $scope.clearSearch = function(){
-    this.searchTerm = "";
-    $scope.load();
+  $scope.resetSearchAll = function(sTerm){
+    $scope.directory = [];
+    $scope.searchTerm.text = "";
   }
 
   $scope.fullProfileImagePath = function(name){
@@ -347,12 +214,7 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.showDetail = function(contact){
     // set current contact detail in rootScope
     $rootScope.setCurrentContactDetail(contact);
-    $window.location.href = ("#/tab/offices/contact._id");
-  }
-
-  if(!API.getOfficeLoadStatus() || $scope.directory.length == 0){  // checks if status has been loaded before
-    // initial load... No history... Do first load
-    $scope.load();
+    $window.location.href = ("#/tab/all/contact._id");
   }
 
 })

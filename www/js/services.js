@@ -3,6 +3,8 @@ angular.module('directory.services',[])
     var base = "http://directry-serv.azurewebsites.net";    // production
     //var base = "http://localhost:9804";    // development
 
+
+
     var allLoaded = false;
     var allContactProfiles = [];
 
@@ -29,6 +31,65 @@ angular.module('directory.services',[])
       }, 1999);
     };
 
+
+    $rootScope.setUpdateDate = function(){
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+
+      var yyyy = today.getFullYear();
+      if(dd<10){
+          dd='0'+dd
+      }
+      if(mm<10){
+          mm='0'+mm
+      }
+      var today = dd+'/'+mm+'/'+yyyy;
+      $window.localStorage.updateDate = today;
+    }
+
+
+    $rootScope.getUpdateDate = function(){
+      return $window.localStorage.updateDate || ': Never';
+    }
+
+    $rootScope.setContactList = function(contactsList){
+      $window.localStorage.contactsList = JSON.stringify(contactsList);
+    }
+
+    $rootScope.getContactList = function(){
+      return JSON.parse($window.localStorage['contactsList'] || '{}');
+    }
+
+    $rootScope.setProfileList = function(profileList){
+      $window.localStorage.profileList = JSON.stringify(profileList);
+    }
+
+    $rootScope.getProfileList = function(searchTerm){
+      var list = JSON.parse($window.localStorage['profileList'] || '{}');
+      var filteredList = [];
+      // split search term
+      if(!searchTerm || searchTerm == "")
+        return list;
+      var searchTermsArray = searchTerm.split(" "); // splitting based on space
+
+      for (var profIndex in list) {
+        var prof = list[profIndex];
+        var added = false;
+        for (var stermIndex in searchTermsArray) {
+          var sterm = searchTermsArray[stermIndex];
+          // look for specific properties
+          if (prof.hasOwnProperty('name')) {
+            if(prof['name'].toLowerCase().indexOf(String(sterm).toLowerCase()) > -1 && !added){
+              filteredList.push(prof);
+              added = true;
+            }
+          }
+        }
+      }
+      return filteredList;
+    }
+
     $rootScope.setCurrentContactDetail = function(contactDetail){
       $window.localStorage.currentContactDetail = JSON.stringify(contactDetail);
     }
@@ -48,6 +109,12 @@ angular.module('directory.services',[])
     }
 
     return {
+      updateDirectory : function(){
+        return $http.get(base + '/api/v1/directry/list/pull-latest', {
+                    method: 'GET',
+                    params: params
+        });
+      },
       listDirectory : function(params){
         return $http.get(base + '/api/v1/directry/list', {
                     method: 'GET',

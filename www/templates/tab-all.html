@@ -1,33 +1,33 @@
 <ion-view>
   <ion-nav-title>
-    <div class="item page-nav-title">
-      <span>ALL</span>
-    </div>
+    <a class="item page-nav-title item-icon-right" href="#">
+      ALL <span style="font-size:10px; float:right;"> last update: {{updateDate}}</span>
+      <i class="icon ion-ios-cloud-download-outline" ng-click="updateDirectory()"></i>
+    </a>
   </ion-nav-title>
   <ion-content>
-    <div class="item item-input-inset">
-      <label class="item-input-wrapper" style="background-color: #FFF !important;">
-        <i class="icon ion-search placeholder-icon"></i>
-        <div>
-          <input type="text" placeholder="search" ng-model="searchTerm">
-        </div>
-      </label>
-      <i class="icon ion-close-round input-button" ng-if="searchTerm.length" ng-click="clearSearch()" style="float:right !important;"></i>
-      <button class="button button-small background-theme-color" ng-click="search()" ng-hide="true">
-        <strong class="white-text">Search</strong>
+    <div class="bar bar-header item-input-inset">
+      <a class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" placeholder="Search" ng-model="searchTerm.text">
+        <i class="icon ion-close-round placeholder-icon" ng-if="searchTerm.text.length" ng-click="resetSearchAll()"></i>
+      </a>
+      <button class="button button-clear" ng-click="searchAll()">
+        Search
       </button>
     </div>
-    <ion-list>
-      <ion-item class="item-avatar" ng-repeat="contact in directory | filter:searchTerm" ng-click="showDetail({{contact}})" >
+    <ion-list ng-hide="showSearchPrompt()">
+      <ion-item class="item-avatar" ng-repeat="contact in directory" ng-click="showDetail({{contact}})" >
         <img ng-src="{{fullProfileImagePath(contact.pic)}}" style="width: 64px; height: 64px">
         <h2>
           <strong>{{contact.name}}</strong>
         </h2>
         <p>{{contact.address}}</p>
       </ion-item>
-      <div class="center-div " ng-show="{{stillMoreContacts}}" style="margin:10px !important; padding:10px !mportant;" ng-click="loadMore()">
-        <span class="white-text background-theme-color" style="border: solid 5px #0D6759;">{{loadButtonText}}</span>
-      </div>
     </ion-list>
+    <div ng-show="showSearchPrompt()" style="text-align:center;margin-top:25px;">
+        <img src="./img/search.jpg" width="50%" height="50%" style="margin:auto auto;" >
+    </div>
+
   </ion-content>
 </ion-view>
