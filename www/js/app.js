@@ -15,7 +15,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
 
-    if( ionic.Platform.isAndroid() )  {
+    /*if( ionic.Platform.isAndroid() )  {
         admobid = { // for Android
           banner: 'ca-app-pub-6699142760491850/5045443529'
         };
@@ -28,9 +28,9 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
               autoShow:true
             }
           );
-    }
+    }*/
 
-    /*var admobid = {};
+    var admobid = {};
         // select the right Ad Id according to platform
         if( /(android)/i.test(navigator.userAgent) ) {
             admobid = { // for Android
@@ -53,7 +53,6 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       adId:admobid.banner,
       position:AdMob.AD_POSITION.BOTTOM_CENTER,
       autoShow:true} );
-*/
   });
 })
 
