@@ -28,7 +28,7 @@ angular.module('directory.services',[])
       $rootScope.show(text);
       $window.setTimeout(function(){
         $rootScope.hide();
-      }, 1999);
+      }, 2222);
     };
 
 
@@ -65,7 +65,7 @@ angular.module('directory.services',[])
       $window.localStorage.profileList = JSON.stringify(profileList);
     }
 
-    $rootScope.getProfileList = function(searchTerm){
+    $rootScope.getProfileList = function(searchTerm, category){
       var list = JSON.parse($window.localStorage['profileList'] || '{}');
       var filteredList = [];
       // split search term
@@ -81,8 +81,18 @@ angular.module('directory.services',[])
           // look for specific properties
           if (prof.hasOwnProperty('name')) {
             if(prof['name'].toLowerCase().indexOf(String(sterm).toLowerCase()) > -1 && !added){
-              filteredList.push(prof);
-              added = true;
+              if(category){
+                if(prof.hasOwnProperty('category')){
+                  if(category.toLowerCase() == prof.category.toLowerCase()){
+                    filteredList.push(prof);
+                    added = true;
+                  }
+                }
+              }
+              else{
+                filteredList.push(prof);
+                added = true;
+              }
             }
           }
         }
@@ -96,6 +106,20 @@ angular.module('directory.services',[])
 
     $rootScope.getCurrentContactDetail = function(){
       return JSON.parse($window.localStorage['currentContactDetail'] || '{}');
+    }
+
+    $rootScope.getCurrentContactList = function(userId){
+      var list  = $rootScope.getContactList();
+      var currContactList = [];
+      for (var contactIndex in list) {
+        if (list.hasOwnProperty(contactIndex)) {
+          var contact = list[contactIndex];
+          if(String(contact.userId) == String(userId)){
+            currContactList.push(contact);
+          }
+        }
+      }
+      return currContactList;
     }
 
     $rootScope.fullProfileImagePath = function(name){
@@ -112,7 +136,7 @@ angular.module('directory.services',[])
       updateDirectory : function(){
         return $http.get(base + '/api/v1/directry/list/pull-latest', {
                     method: 'GET',
-                    params: params
+                    params: {}
         });
       },
       listDirectory : function(params){

@@ -2,15 +2,21 @@ angular.module('directory.controllers', ['directory.services'])
 
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
-  // Bootstraping app
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
+  $scope.noContactMessage = "O contacts"
+
   $scope.showSearchPrompt = function(){
     return $scope.directory.length > 0 ? false : true;
   }
 
   $scope.updateDate = $rootScope.getUpdateDate();
 
+  // check for update date... if equals never, display modal to pull latest content
+  if($scope.updateDate == ': Never'){
+    // propmt for update
+    $rootScope.notify("You have not synced your directory. Pull content to sync..");
+  }
 
   if($ionicHistory.backView()){ // Not initial load..
     $ionicHistory.clearHistory(); // Clear history  // rest of things remain same for now
@@ -58,35 +64,26 @@ angular.module('directory.controllers', ['directory.services'])
 
 })
 .controller('DirectoryAllDetailCtrl', function($rootScope, $scope, API, $window){
-  $rootScope.show("Loading contacts")
+  $rootScope.show("Loading contacts");
   $scope.contact = $rootScope.getCurrentContactDetail();
   $scope.picUrl = $rootScope.fullProfileImagePath($scope.contact.pic);
-      // Load contacts
-  $scope.contactDetails = [];
-  $scope.contactCount = 0;
-  API.loadUserContacts({id:$scope.contact.userId}).
-    success(function(list){
-      console.log(list);
-      $scope.contactDetails = list;
-      $scope.contactCount =  list.length;
-      $rootScope.hide()  ;
-    })
-    .error(function(err){
-      console.log(err);
-      $rootScope.hide()  ;
-    })
-
-  $scope.triggerAction = function(detail){
-    // triggers contact operation.. e.g Initiate a phone call
-
-  }
+  $scope.contactDetails = $rootScope.getCurrentContactList($scope.contact.userId);
+  $scope.contactCount = $scope.contactDetails.length;
+  $rootScope.hide();
 })
 .controller('DirectoryEmergencyCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   // Bootstraping app
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
+  $scope.noContactMessage = "O contacts"
 
   $scope.updateDate = $rootScope.getUpdateDate();
+
+  // check for update date... if equals never, display modal to pull latest content
+  if($scope.updateDate == ': Never'){
+    // propmt for update
+    $rootScope.notify("You have not synced your directory. Pull content to sync..");
+  }
 
   $scope.showSearchPrompt = function(){
     return $scope.directory.length > 0 ? false : true;
@@ -99,7 +96,7 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.searchAll = function(){
     // get search term
     $rootScope.show("Loading...");
-    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text, "Emergency");
     $rootScope.hide();
   }
 
@@ -133,41 +130,29 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.showDetail = function(contact){
     // set current contact detail in rootScope
     $rootScope.setCurrentContactDetail(contact);
-    $window.location.href = ("#/tab/all/contact._id");
+    $window.location.href = ("#/tab/emergency/contact._id");
   }
 
 })
 .controller('DirectoryEmergencyDetailCtrl', function($rootScope, $scope, API, $window){
+  $rootScope.show("Loading contacts");
   $scope.contact = $rootScope.getCurrentContactDetail();
-
-  // Load contacts
-  $rootScope.show("Loading...");
   $scope.picUrl = $rootScope.fullProfileImagePath($scope.contact.pic);
-  console.log($scope.picUrl)    ;
-
-  $scope.contactDetails = [];
-  $scope.contactCount = 0;
-  API.loadUserContacts({id:$scope.contact.userId}).
-    success(function(list){
-      console.log(list);
-      $scope.contactDetails = list;
-      $scope.contactCount =  list.length;
-      $rootScope.hide();
-    })
-    .error(function(err){
-      console.log(err);
-      $rootScope.hide();
-    })
-
-  $scope.triggerAction = function(detail){
-    // triggers contact operation.. e.g Initiate a phone call
-
-  }
+  $scope.contactDetails = $rootScope.getCurrentContactList($scope.contact.userId);
+  $scope.contactCount = $scope.contactDetails.length;
+  $rootScope.hide();
 })
 .controller('DirectoryOfficesCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
+  $scope.noContactMessage = "O contacts"
   $scope.updateDate = $rootScope.getUpdateDate();
+
+  // check for update date... if equals never, display modal to pull latest content
+  if($scope.updateDate == ': Never'){
+    // propmt for update
+    $rootScope.notify("You have not synced your directory. Pull content to sync..");
+  }
 
   if($ionicHistory.backView()){ // Not initial load..
     $ionicHistory.clearHistory(); // Clear history  // rest of things remain same for now
@@ -176,11 +161,11 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.showSearchPrompt = function(){
     return $scope.directory.length > 0 ? false : true;
   }
-  
+
   $scope.searchAll = function(){
     // get search term
     $rootScope.show("Loading...");
-    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text, "Office");
     $rootScope.hide();
   }
 
@@ -214,31 +199,15 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.showDetail = function(contact){
     // set current contact detail in rootScope
     $rootScope.setCurrentContactDetail(contact);
-    $window.location.href = ("#/tab/all/contact._id");
+    $window.location.href = ("#/tab/offices/contact._id");
   }
 
 })
 .controller('DirectoryOfficesDetailCtrl', function($rootScope, $scope, API, $window){
+  $rootScope.show("Loading contacts");
   $scope.contact = $rootScope.getCurrentContactDetail();
-
-  $rootScope.show("Loading...");
   $scope.picUrl = $rootScope.fullProfileImagePath($scope.contact.pic);
-      // Load contacts
-  $scope.contactDetails = [];
-  $scope.contactCount = 0;
-  API.loadUserContacts({id:$scope.contact.userId}).
-    success(function(list){
-      $scope.contactDetails = list;
-      $scope.contactCount =  list.length;
-      $rootScope.hide();
-    })
-    .error(function(err){
-      console.log(err);
-      $rootScope.hide();
-    })
-
-  $scope.triggerAction = function(detail){
-    // triggers contact operation.. e.g Initiate a phone call
-
-  }
+  $scope.contactDetails = $rootScope.getCurrentContactList($scope.contact.userId);
+  $scope.contactCount = $scope.contactDetails.length;
+  $rootScope.hide();
 })
