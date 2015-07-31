@@ -1,23 +1,7 @@
-/* Empty. Add your own CSS if you like */
-.emergenct-tab-icon {
-  font-size: 64px;
-  color : red;
-}
-
-.saved-tab-icon {
-  font-size: 64px;
-  color : green;
-}
-
-.offices-tab-icon {
-  font-size: 64px;
-  color : blue;
-}
-
 .page-header{
-  background-color: #0D6759 !important;
+  background-color: #BD5532 !important;
   height: 50px !important;
-  border-top: 5px solid #0D6759 !important;
+  border-top: 5px solid #BD5532 !important;
   border-bottom: none;
   width: 100% !important;
 }
@@ -33,7 +17,7 @@
 }
 
 .tab-nav{
-  background-color: #0D6759 !important;
+  background-color: #373B44 !important;
 }
 
 .white-text{
@@ -41,7 +25,7 @@
 }
 
 .background-theme-color{
-  background-color: #0D6759 !important;
+  background-color: #BD5532 !important;
 }
 
 .title-image {
@@ -51,21 +35,25 @@
 
 .tab-bar-section{
   margin-top: 3px !important;
-  background-color: #0D6759 !important;
+  background-color: #BD5532 !important;
+  margin-bottom: -3px;
 }
 
 .tab-item{
-  background-color: #0D6759 !important;
+  background-color: #373B44 !important;
   color: #FFF !important;
-  border-bottom-color: #0D6759 !important;
+  border-bottom-color: #BD5532 !important;
   opacity: 1 !important;
+  border-width: 0px !important;
+
 }
 
 .tab-item.active, .tab-item.activated, .tab-item-active {
-  background-color: #0D6759 !important;
-  color: #FFF !important;
+  background-color: #373B44 !important;
+  color: #BD5532 !important;
   border-bottom-color: #FFF !important;
   opacity: 1 !important;
+  border-width: 0px !important;
 }
 
 .center-div{
@@ -84,8 +72,11 @@
   color: #FFF !important;
 }
 
-.fill-ion-content{
-  width: 100% !important;
-  height: 100% ;
-  background-color: red;
+.bordered-div{
+  border-width: 2px !important;
+  border-color: #BD5532 !important;
+}
+
+.black{
+  color: #373B44;
 }

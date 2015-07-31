@@ -24,9 +24,15 @@ angular.module('directory.controllers', ['directory.services'])
 
   $scope.searchAll = function(){
     // get search term
-    $rootScope.show("Loading...");
-    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
-    $rootScope.hide();
+    if(!$scope.searchTerm.text || $scope.searchTerm.text == '')
+    {
+      $rootScope.notify("Please enter name to search!");
+    }
+    else{
+      $rootScope.show("Loading...");
+      $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+      $rootScope.hide();
+    }
   }
 
   $scope.updateDirectory = function(){
@@ -95,9 +101,15 @@ angular.module('directory.controllers', ['directory.services'])
 
   $scope.searchAll = function(){
     // get search term
-    $rootScope.show("Loading...");
-    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text, "Emergency");
-    $rootScope.hide();
+    if(!$scope.searchTerm.text || $scope.searchTerm.text == '')
+    {
+      $rootScope.notify("Please enter name to search!");
+    }
+    else{
+      $rootScope.show("Loading...");
+      $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+      $rootScope.hide();
+    }
   }
 
   $scope.updateDirectory = function(){
@@ -163,10 +175,15 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.searchAll = function(){
-    // get search term
-    $rootScope.show("Loading...");
-    $scope.directory = $rootScope.getProfileList($scope.searchTerm.text, "Office");
-    $rootScope.hide();
+    if(!$scope.searchTerm.text || $scope.searchTerm.text == '')
+    {
+      $rootScope.notify("Please enter name to search!");
+    }
+    else{
+      $rootScope.show("Loading...");
+      $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+      $rootScope.hide();
+    }
   }
 
   $scope.updateDirectory = function(){

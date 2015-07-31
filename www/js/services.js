@@ -28,7 +28,7 @@ angular.module('directory.services',[])
       $rootScope.show(text);
       $window.setTimeout(function(){
         $rootScope.hide();
-      }, 2222);
+      }, 1999);
     };
 
 

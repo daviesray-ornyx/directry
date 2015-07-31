@@ -12,12 +12,11 @@
         <input type="search" placeholder="Search" ng-model="searchTerm.text">
       </a>
       <button class="button button-clear" ng-click="searchAll()">
-        Search
+        <strong class="black">Search</strong>
       </button>
     </div>
     <ion-list ng-hide="showSearchPrompt()">
-      <ion-item class="item-avatar" ng-repeat="contact in directory" ng-click="showDetail({{contact}})" >
-        <img ng-src="{{fullProfileImagePath(contact.pic)}}" style="width: 64px; height: 64px">
+      <ion-item ng-repeat="contact in directory" ng-click="showDetail({{contact}})" >
         <h2>
           <strong>{{contact.name}}</strong>
         </h2>
@@ -28,10 +27,8 @@
       </div>
     </ion-list>
     <div ng-show="showSearchPrompt()" style="text-align:center;margin-top:25px;">
-      <h5 ng-show="showSearchPrompt()">{{noContactMessage}} </h5>
+      <h5 ng-show="showSearchPrompt()" style="color:#BD5532;">{{noContactMessage}} </h5>
         <br/>
-      <h3> Search for contacts</h3>
-      <h4> Enter descriptive space separated search terms </h4>
     </div>
   </ion-content>
 </ion-view>
