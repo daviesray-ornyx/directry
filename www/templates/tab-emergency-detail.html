@@ -14,11 +14,12 @@
       <div class="item item-divider">
         CONTACTS <span class="badge badge-assertive background-theme-color">{{contactCount}}</span>
       </div>
-      <ion-item class="item item-icon-left" ng-repeat="detail in contactDetails" ng-click="triggerAction({{detail}})" >
+      <ion-item class="item item-icon-left item-icon-right" ng-repeat="detail in contactDetails" ng-click="triggerAction({{detail}})" >
         <i class="icon ion-android-contact"></i>
         <h2>
           {{detail.value}}
         </h2>
+        <a href="tel:{{detail.value}}" class="icon ion-ios-telephone" style="color:#373B44; float:right;text-decoration: none;"></a>
       </ion-item>
     </ion-list>
   </ion-content>
