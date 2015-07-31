@@ -1,7 +1,7 @@
 .page-header{
-  background-color: #BD5532 !important;
+  background-color: #0C85A7 !important;
   height: 50px !important;
-  border-top: 5px solid #BD5532 !important;
+  border-top: 5px solid #0C85A7 !important;
   border-bottom: none;
   width: 100% !important;
 }
@@ -17,7 +17,7 @@
 }
 
 .tab-nav{
-  background-color: #373B44 !important;
+  background-color: #0C85A7 !important;
 }
 
 .white-text{
@@ -25,7 +25,7 @@
 }
 
 .background-theme-color{
-  background-color: #BD5532 !important;
+  background-color: #0C85A7 !important;
 }
 
 .title-image {
@@ -35,22 +35,22 @@
 
 .tab-bar-section{
   margin-top: 3px !important;
-  background-color: #BD5532 !important;
+  background-color: #0C85A7 !important;
   margin-bottom: -3px;
 }
 
 .tab-item{
-  background-color: #373B44 !important;
+  background-color: #0C85A7 !important;
   color: #FFF !important;
-  border-bottom-color: #BD5532 !important;
+  border-bottom-color: #0C85A7 !important;
   opacity: 1 !important;
   border-width: 0px !important;
 
 }
 
 .tab-item.active, .tab-item.activated, .tab-item-active {
-  background-color: #373B44 !important;
-  color: #BD5532 !important;
+  background-color: #0C85A7 !important;
+  color: #FFF !important;
   border-bottom-color: #FFF !important;
   opacity: 1 !important;
   border-width: 0px !important;
@@ -74,9 +74,9 @@
 
 .bordered-div{
   border-width: 2px !important;
-  border-color: #BD5532 !important;
+  border-color: #0C85A7 !important;
 }
 
 .black{
-  color: #373B44;
+  color: #0C85A7;
 }

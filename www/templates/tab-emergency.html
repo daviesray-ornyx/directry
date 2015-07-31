@@ -1,7 +1,7 @@
 <ion-view >
   <ion-nav-title>
     <a class="item page-nav-title item-icon-right" href="#">
-      EMERGENCY <span style="font-size:10px; float:right;"> last update: 3/7/2015</span>
+      EMERGENCY <span style="font-size:10px; float:right;"> sync directory</span>
       <i class="icon ion-ios-cloud-download-outline" ng-click="updateDirectory()"></i>
     </a>
   </ion-nav-title>
@@ -12,7 +12,7 @@
         <input type="search" placeholder="Search" ng-model="searchTerm.text">
       </a>
       <button class="button button-clear" ng-click="searchAll()">
-        <strong class="black">Search</strong>
+        <span>Search</span>
       </button>
     </div>
     <ion-list ng-hide="showSearchPrompt()">
@@ -27,8 +27,7 @@
       </div>
     </ion-list>
     <div ng-show="showSearchPrompt()" style="text-align:center;margin-top:25px;">
-      <h5 ng-show="showSearchPrompt()" style="color:#BD5532;">{{noContactMessage}} </h5>
-        <br/>
+
     </div>
   </ion-content>
 </ion-view>

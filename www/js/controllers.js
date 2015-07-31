@@ -36,21 +36,29 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.updateDirectory = function(){
-    $rootScope.show("Updating Directory from Server...")
-    API.updateDirectory({})
-    .success(function(dirObject){
-      $rootScope.setProfileList(dirObject.profileList);
-      $rootScope.setContactList(dirObject.contactsList);
-      // Set last updated
-      $rootScope.setUpdateDate ();
-      $scope.updateDate = $rootScope.getUpdateDate();
-      // Hide loading indicator
-      $rootScope.hide();
-    })
-    .error(function(err){
-      console.log(err);
-      $rootScope.hide();
-    })
+    // check if update is necessary
+    if($scope.updateDate == $rootScope.generateCurrentDate()){
+      // Directry up to date
+      $rootScope.notify("Directory is up to date");
+    }
+    else{
+      // Rootscope not up to date... Sync
+      $rootScope.show("Updating Directory from Server...")
+      API.updateDirectory({})
+      .success(function(dirObject){
+        $rootScope.setProfileList(dirObject.profileList);
+        $rootScope.setContactList(dirObject.contactsList);
+        // Set last updated
+        $rootScope.setUpdateDate ();
+        $scope.updateDate = $rootScope.getUpdateDate();
+        // Hide loading indicator
+        $rootScope.hide();
+      })
+      .error(function(err){
+        console.log(err);
+        $rootScope.hide();
+      })
+    }
   }
 
   $scope.resetSearchAll = function(sTerm){
@@ -113,21 +121,29 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.updateDirectory = function(){
-    $rootScope.show("Updating Directory from Server...")
-    API.updateDirectory({})
-    .success(function(dirObject){
-      $rootScope.setProfileList(dirObject.profileList);
-      $rootScope.setContactList(dirObject.contactsList);
-      // Set last updated
-      $rootScope.setUpdateDate ();
-      $scope.updateDate = $rootScope.getUpdateDate();
-      // Hide loading indicator
-      $rootScope.hide();
-    })
-    .error(function(err){
-      console.log(err);
-      $rootScope.hide();
-    })
+    // check if update is necessary
+    if($scope.updateDate == $rootScope.generateCurrentDate()){
+      // Directry up to date
+      $rootScope.notify("Directory is up to date");
+    }
+    else{
+      // Rootscope not up to date... Sync
+      $rootScope.show("Updating Directory from Server...")
+      API.updateDirectory({})
+      .success(function(dirObject){
+        $rootScope.setProfileList(dirObject.profileList);
+        $rootScope.setContactList(dirObject.contactsList);
+        // Set last updated
+        $rootScope.setUpdateDate ();
+        $scope.updateDate = $rootScope.getUpdateDate();
+        // Hide loading indicator
+        $rootScope.hide();
+      })
+      .error(function(err){
+        console.log(err);
+        $rootScope.hide();
+      })
+    }
   }
 
   $scope.resetSearchAll = function(sTerm){
@@ -187,21 +203,29 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.updateDirectory = function(){
-    $rootScope.show("Updating Directory from Server...")
-    API.updateDirectory({})
-    .success(function(dirObject){
-      $rootScope.setProfileList(dirObject.profileList);
-      $rootScope.setContactList(dirObject.contactsList);
-      // Set last updated
-      $rootScope.setUpdateDate ();
-      $scope.updateDate = $rootScope.getUpdateDate();
-      // Hide loading indicator
-      $rootScope.hide();
-    })
-    .error(function(err){
-      console.log(err);
-      $rootScope.hide();
-    })
+    // check if update is necessary
+    if($scope.updateDate == $rootScope.generateCurrentDate()){
+      // Directry up to date
+      $rootScope.notify("Directory is up to date");
+    }
+    else{
+      // Rootscope not up to date... Sync
+      $rootScope.show("Updating Directory from Server...")
+      API.updateDirectory({})
+      .success(function(dirObject){
+        $rootScope.setProfileList(dirObject.profileList);
+        $rootScope.setContactList(dirObject.contactsList);
+        // Set last updated
+        $rootScope.setUpdateDate ();
+        $scope.updateDate = $rootScope.getUpdateDate();
+        // Hide loading indicator
+        $rootScope.hide();
+      })
+      .error(function(err){
+        console.log(err);
+        $rootScope.hide();
+      })
+    }
   }
 
   $scope.resetSearchAll = function(sTerm){
