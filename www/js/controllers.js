@@ -4,7 +4,7 @@ angular.module('directory.controllers', ['directory.services'])
 
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
-  $scope.noContactMessage = "O contacts"
+  $scope.noContactMessage = ""
 
   $scope.showSearchPrompt = function(){
     return $scope.directory.length > 0 ? false : true;
@@ -30,7 +30,8 @@ angular.module('directory.controllers', ['directory.services'])
     }
     else{
       $rootScope.show("Loading...");
-      $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+      $scope.directory = $rootScope.getProfileList($scope.searchTerm.text, "All", $scope.searchTerm.county || '');
+      $scope.noContactMessage = $scope.directory.length < 1 ? "Zero Contacts found... Refine your search." : "";
       $rootScope.hide();
     }
   }
@@ -89,7 +90,7 @@ angular.module('directory.controllers', ['directory.services'])
   // Bootstraping app
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
-  $scope.noContactMessage = "O contacts"
+  $scope.noContactMessage = ""
 
   $scope.updateDate = $rootScope.getUpdateDate();
 
@@ -115,7 +116,8 @@ angular.module('directory.controllers', ['directory.services'])
     }
     else{
       $rootScope.show("Loading...");
-      $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+      $scope.directory = $rootScope.getProfileList($scope.searchTerm.text, "Emergency", $scope.searchTerm.county || '');
+      $scope.noContactMessage = $scope.directory.length < 1 ? "Zero Contacts found... Refine your search." : "";
       $rootScope.hide();
     }
   }
@@ -173,7 +175,7 @@ angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryOfficesCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
-  $scope.noContactMessage = "O contacts"
+  $scope.noContactMessage = ""
   $scope.updateDate = $rootScope.getUpdateDate();
 
   // check for update date... if equals never, display modal to pull latest content
@@ -197,7 +199,8 @@ angular.module('directory.controllers', ['directory.services'])
     }
     else{
       $rootScope.show("Loading...");
-      $scope.directory = $rootScope.getProfileList($scope.searchTerm.text);
+      $scope.directory = $rootScope.getProfileList($scope.searchTerm.text, "Office", $scope.searchTerm.county || '');
+      $scope.noContactMessage = $scope.directory.length < 1 ? "Zero Contacts found... Refine your search." : "";
       $rootScope.hide();
     }
   }

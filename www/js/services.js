@@ -4,7 +4,6 @@ angular.module('directory.services',[])
     //var base = "http://localhost:9804";    // development
 
 
-
     var allLoaded = false;
     var allContactProfiles = [];
 
@@ -81,36 +80,47 @@ angular.module('directory.services',[])
       $window.localStorage.profileList = JSON.stringify(profileList);
     }
 
-    $rootScope.getProfileList = function(searchTerm, category){
+    $rootScope.getProfileList = function(searchTerm, category, county){
       var list = JSON.parse($window.localStorage['profileList'] || '{}');
       var filteredList = [];
       // split search term
       if(!searchTerm || searchTerm == "")
-        return list;
+        return [];
       var searchTermsArray = searchTerm.split(" "); // splitting based on space
 
       for (var profIndex in list) {
-        var prof = list[profIndex];
-        var added = false;
+        var prof = list[profIndex]; // get profile at indexOf
+        var addProfile = false;
+        var matchCount = 0;
         for (var stermIndex in searchTermsArray) {
           var sterm = searchTermsArray[stermIndex];
           // look for specific properties
-          if (prof.hasOwnProperty('name')) {
-            if(prof['name'].toLowerCase().indexOf(String(sterm).toLowerCase()) > -1 && !added){
-              if(category){
-                if(prof.hasOwnProperty('category')){
-                  if(category.toLowerCase() == prof.category.toLowerCase()){
-                    filteredList.push(prof);
-                    added = true;
-                  }
-                }
-              }
-              else{
-                filteredList.push(prof);
-                added = true;
-              }
+          if (prof.hasOwnProperty('name')) {  // profile has property name
+            if(prof['name'].toLowerCase().indexOf(String(sterm).toLowerCase()) > -1 ){  // contains term
+              matchCount = matchCount + 1;
+              addProfile = true;
             }
           }
+        } // end of testing for searchTerm
+        // Start testing for category
+        if(prof.hasOwnProperty('category') && category.toLowerCase() != "all") {
+          if(category.toLowerCase() != prof.category.toLowerCase()){
+            // Set addition to false
+            addProfile = false;
+          }
+        } // Remove addition option if categories do not match
+
+        // Check for location option
+        if(prof.hasOwnProperty('address') && county != ''){
+          // county has been passed
+          if(prof['address'].toLowerCase().indexOf(String(county).toLowerCase()) < 0 ){  // Not contained in address
+            addProfile = false;
+          }
+        }
+        // determine whether to add or not
+        if(addProfile){
+          prof.matchCount = matchCount;
+          filteredList.push(prof);
         }
       }
       return filteredList;
