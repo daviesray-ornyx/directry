@@ -15,73 +15,78 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
 
-    function onLoad() {
-            if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
-                document.addEventListener('deviceready', initApp, false);
-            } else {
-                initApp();
-            }
-        }
+
+    function registerAdEvents() {
+        // new events, with variable to differentiate: adNetwork, adType, adEvent
+        document.addEventListener('onAdFailLoad', function(data){
+          alert('error: ' + data.error +
+              ', reason: ' + data.reason +
+              ', adNetwork:' + data.adNetwork +
+              ', adType:' + data.adType +
+              ', adEvent:' + data.adEvent); // adType: 'banner', 'interstitial', etc.
+        });
+        document.addEventListener('onAdLoaded', function(data){});
+        document.addEventListener('onAdPresent', function(data){});
+        document.addEventListener('onAdLeaveApp', function(data){});
+        document.addEventListener('onAdDismiss', function(data){});
+    }
+
+    function initAd(){
+      console.log("Initing add");
+        var defaultOptions = {
+            // adSize: 'SMART_BANNER',
+            // width: integer, // valid when set adSize 'CUSTOM'
+            // height: integer, // valid when set adSize 'CUSTOM'
+            position: AdMob.AD_POSITION.BOTTOM_CENTER,
+            // offsetTopBar: false, // avoid overlapped by status bar, for iOS7+
+            bgColor: 'black', // color name, or '#RRGGBB'
+            // x: integer,		// valid when set position to 0 / POS_XY
+            // y: integer,		// valid when set position to 0 / POS_XY
+            isTesting: true, // set to true, to receiving test ad for testing purpose
+            // autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
+        };
+        window.AdMob.setOptions( defaultOptions );
+        registerAdEvents();
+    }
+    // optional, in case respond to events or handle error
+
+    if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
+      console.log("Init APPPP");
+      if (! window.AdMob ) { alert( 'admob plugin not ready' ); return; }
+      initAd();
+      // display the banner at startup
+      console.log("Creating banner");
+      createSelectedBanner();
+    }
+
+
     	var admobid = {};
     	if( /(android)/i.test(navigator.userAgent) ) {
+        console.log("Other platform android");
     		admobid = { // for Android
     			banner: 'ca-app-pub-6699142760491850/5045443529',
     			interstitial: 'ca-app-pub-6699142760491850/8733293122'
     		};
-    	} else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+    	}
+      else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
     		admobid = { // for iOS
     			banner: 'ca-app-pub-6869992474017983/4806197152',
     			interstitial: 'ca-app-pub-6869992474017983/7563979554'
     		};
-    	} else {
+    	}
+      else {
+        console.log("Other platform");
     		admobid = { // for Windows Phone
     			banner: 'ca-app-pub-6699142760491850/5045443529',
     			interstitial: 'ca-app-pub-6699142760491850/8733293122'
     		};
     	}
 
-        function initApp() {
-    		if (! AdMob ) { alert( 'admob plugin not ready' ); return; }
-    		initAd();
-            // display the banner at startup
-            createSelectedBanner();
-        }
-        function initAd(){
-            var defaultOptions = {
-                // adSize: 'SMART_BANNER',
-                // width: integer, // valid when set adSize 'CUSTOM'
-                // height: integer, // valid when set adSize 'CUSTOM'
-                position: AdMob.AD_POSITION.BOTTOM_CENTER,
-                // offsetTopBar: false, // avoid overlapped by status bar, for iOS7+
-                bgColor: 'black', // color name, or '#RRGGBB'
-                // x: integer,		// valid when set position to 0 / POS_XY
-                // y: integer,		// valid when set position to 0 / POS_XY
-                isTesting: true, // set to true, to receiving test ad for testing purpose
-                // autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
-            };
-            AdMob.setOptions( defaultOptions );
-            registerAdEvents();
-        }
-        // optional, in case respond to events or handle error
-        function registerAdEvents() {
-            // new events, with variable to differentiate: adNetwork, adType, adEvent
-            document.addEventListener('onAdFailLoad', function(data){
-            	alert('error: ' + data.error +
-            			', reason: ' + data.reason +
-            			', adNetwork:' + data.adNetwork +
-            			', adType:' + data.adType +
-            			', adEvent:' + data.adEvent); // adType: 'banner', 'interstitial', etc.
-            });
-            document.addEventListener('onAdLoaded', function(data){});
-            document.addEventListener('onAdPresent', function(data){});
-            document.addEventListener('onAdLeaveApp', function(data){});
-            document.addEventListener('onAdDismiss', function(data){});
-        }
         // preppare and load ad resource in background, e.g. at begining of game level
-      if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
+      if(window.AdMob) window.AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
 
       // show the interstitial later, e.g. at end of game level
-      if(AdMob) AdMob.showInterstitial();
+      if(window.AdMob) window.AdMob.showInterstitial();
   })
 })
 
