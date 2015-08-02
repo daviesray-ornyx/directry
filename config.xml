@@ -10,7 +10,7 @@
     <content src="index.html" />
 
     <plugin name="cordova-plugin-device" spec="^1.0.1" />
-    <plugin name="com.google.cordova.admob" source="plugins.cordova.io" />
+    <plugin name="cordova-plugin-admobpro" source="npm"/>
     <access origin="*" launch-external="yes" />
 
     <preference name="webviewbounce" value="false" />
