@@ -26,6 +26,7 @@
   <body onload="onDocLoad()" onresize="onResize()" ng-app="directry" animation="slide-left-right-ios7">
   <script>
       function onDocLoad() {
+
           if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
               document.addEventListener('deviceready', initApp, false);
           } else {
@@ -33,13 +34,14 @@
           }
       }
 
+      console.log(window.cordova.plugins.AdMob);
       function initApp() {
           initAd();
           // display the banner at startup
-          window.plugins.AdMob.createBannerView();
+          window.cordova.plugins.AdMob.createBannerView();
       }
       function initAd(){
-          if ( window.plugins && window.plugins.AdMob ) {
+          if ( window.plugins && window.cordova.plugins.AdMob ) {
             var ad_units = {
           ios : {
             banner: 'ca-app-pub-6699142760491850/5045443529', // or DFP format "/6253334/dfp_example_ad"
@@ -62,7 +64,7 @@
             } else {
               admobid = ad_units.wp8;
             }
-              window.plugins.AdMob.setOptions( {
+              window.cordova.plugins.AdMob.setOptions( {
                   publisherId: admobid.banner,
                   interstitialAdId: admobid.interstitial,
                   bannerAtTop: false, // set to true, to put banner at top
