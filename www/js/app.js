@@ -14,48 +14,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-
-
-    function registerAdEvents() {
-        // new events, with variable to differentiate: adNetwork, adType, adEvent
-        document.addEventListener('onAdFailLoad', function(data){
-          alert('error: ' + data.error +
-              ', reason: ' + data.reason +
-              ', adNetwork:' + data.adNetwork +
-              ', adType:' + data.adType +
-              ', adEvent:' + data.adEvent); // adType: 'banner', 'interstitial', etc.
-        });
-        document.addEventListener('onAdLoaded', function(data){});
-        document.addEventListener('onAdPresent', function(data){});
-        document.addEventListener('onAdLeaveApp', function(data){});
-        document.addEventListener('onAdDismiss', function(data){});
-    }
-
-    var ad_units = {
-
-           ios : {
-             banner: {
-               publisherId: 'ca-app-pub-6699142760491850/5045443529',
-               isTesting: true
-             }
-           },
-           android : {
-             banner: {
-               publisherId: 'ca-app-pub-6699142760491850/5045443529',
-               isTesting: true
-             }
-           }
-        };
-           // select the right Ad Id according to platform
-        var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
-
-        console.log(admobid);
-        // Nothing happens.....
-        if (window.AdMob) {
-          AdMob.createBanner(admobid.banner);
-        }
-
-      });
+  });
 
 })
 
