@@ -31,6 +31,8 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
 
     }, false);
 
+  });
+
 
 })
 
