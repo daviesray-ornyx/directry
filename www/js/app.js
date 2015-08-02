@@ -31,36 +31,24 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
         document.addEventListener('onAdDismiss', function(data){});
     }
 
-    if(window.AdMob) {
-                var admobid;
+    var ad_units = {
+           ios : {
+               banner: 'ca-app-pub-6699142760491850/5045443529',
+               interstitial: 'ca-app-pub-6699142760491850/8733293122'
+           },
+           android : {
+             banner: 'ca-app-pub-6699142760491850/5045443529',
+             interstitial: 'ca-app-pub-6699142760491850/8733293122'
+           }
+        };
+           // select the right Ad Id according to platform
+        var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
 
-                if (device.platform == "Android") {
-                    admobid = { // for Android
-                        banner: 'ca-app-pub-6699142760491850/5045443529',
-                        interstitial: 'ca-app-pub-6699142760491850/8733293122'
-                    };
-                } else {
-                    admobid = { // for iOS
-                        banner: 'ca-app-pub-6699142760491850/5045443529',
-                        interstitial: 'ca-app-pub-6699142760491850/8733293122'
-                    };
-                }
+        // Nothing happens.....
+        if(AdMob) AdMob.createBanner( admobid.banner );
 
-                $adMob.createBanner( {
-                    adId: admobid.banner,
-                    autoShow: true,
-                    bgColor: 'black',
-                    position: $adMob.position.BOTTOM_CENTER
-                });
+      });     
 
-                $adMob.prepareInterstitial({
-                    adId: admobid.interstitial,
-                    autoShow: true
-                });
-                
-                if(window.AdMob) window.AdMob.showInterstitial();
-            }
-  })
 })
 
 .config(function($stateProvider, $urlRouterProvider){
