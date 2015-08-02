@@ -32,22 +32,30 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
     }
 
     var ad_units = {
+
            ios : {
-               banner: 'ca-app-pub-6699142760491850/5045443529',
-               interstitial: 'ca-app-pub-6699142760491850/8733293122'
+             banner: {
+               publisherId: 'ca-app-pub-6699142760491850/5045443529',
+               isTesting: true
+             }
            },
            android : {
-             banner: 'ca-app-pub-6699142760491850/5045443529',
-             interstitial: 'ca-app-pub-6699142760491850/8733293122'
+             banner: {
+               publisherId: 'ca-app-pub-6699142760491850/5045443529',
+               isTesting: true
+             }
            }
         };
            // select the right Ad Id according to platform
         var admobid = ( /(android)/i.test(navigator.userAgent) ) ? ad_units.android : ad_units.ios;
 
+        console.log(admobid);
         // Nothing happens.....
-        if(AdMob) AdMob.createBanner( admobid.banner );
+        if (window.AdMob) {
+          AdMob.createBanner(admobid.banner);
+        }
 
-      });     
+      });
 
 })
 
