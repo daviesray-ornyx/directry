@@ -39,10 +39,10 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
     autoShow: true } );
 
     // preppare and load ad resource in background, e.g. at begining of game level
-    if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
+    if(window.AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
 
     // show the interstitial later, e.g. at end of game level
-    if(AdMob) AdMob.showInterstitial();
+    if(window.AdMob) AdMob.showInterstitial();
   });
 
 })
