@@ -80,12 +80,12 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
         document.addEventListener('onAdDismiss', function(data){});
     }
 
-    if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:true} );
+    if(window.AdMob) window.AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:true} );
     // show the interstitial later, e.g. at end of game level
     //if(AdMob) AdMob.showInterstitial();
 
     // it will display smart banner at top center, using the default options
-    if(AdMob) AdMob.createBanner( {
+    if(window.AdMob) window.AdMob.createBanner( {
         adId: admobid.banner,
         position: AdMob.AD_POSITION.TOP_CENTER,
         autoShow: true
