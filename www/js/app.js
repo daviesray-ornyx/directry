@@ -31,62 +31,35 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
         document.addEventListener('onAdDismiss', function(data){});
     }
 
-    function initAd(){
-      console.log("Initing add");
-        var defaultOptions = {
-            // adSize: 'SMART_BANNER',
-            // width: integer, // valid when set adSize 'CUSTOM'
-            // height: integer, // valid when set adSize 'CUSTOM'
-            position: AdMob.AD_POSITION.BOTTOM_CENTER,
-            // offsetTopBar: false, // avoid overlapped by status bar, for iOS7+
-            bgColor: 'black', // color name, or '#RRGGBB'
-            // x: integer,		// valid when set position to 0 / POS_XY
-            // y: integer,		// valid when set position to 0 / POS_XY
-            isTesting: true, // set to true, to receiving test ad for testing purpose
-            // autoShow: true // auto show interstitial ad when loaded, set to false if prepare/show
-        };
-        window.AdMob.setOptions( defaultOptions );
-        registerAdEvents();
-    }
-    // optional, in case respond to events or handle error
+    if(window.AdMob) {
+                var admobid;
 
-    if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
-      console.log("Init APPPP");
-      if (! window.AdMob ) { alert( 'admob plugin not ready' ); return; }
-      initAd();
-      // display the banner at startup
-      console.log("Creating banner");
-      createSelectedBanner();
-    }
+                if (device.platform == "Android") {
+                    admobid = { // for Android
+                        banner: 'ca-app-pub-6699142760491850/5045443529',
+                        interstitial: 'ca-app-pub-6699142760491850/8733293122'
+                    };
+                } else {
+                    admobid = { // for iOS
+                        banner: 'ca-app-pub-6699142760491850/5045443529',
+                        interstitial: 'ca-app-pub-6699142760491850/8733293122'
+                    };
+                }
 
+                $adMob.createBanner( {
+                    adId: admobid.banner,
+                    autoShow: true,
+                    bgColor: 'black',
+                    position: $adMob.position.BOTTOM_CENTER
+                });
 
-    	var admobid = {};
-    	if( /(android)/i.test(navigator.userAgent) ) {
-        console.log("Other platform android");
-    		admobid = { // for Android
-    			banner: 'ca-app-pub-6699142760491850/5045443529',
-    			interstitial: 'ca-app-pub-6699142760491850/8733293122'
-    		};
-    	}
-      else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
-    		admobid = { // for iOS
-    			banner: 'ca-app-pub-6869992474017983/4806197152',
-    			interstitial: 'ca-app-pub-6869992474017983/7563979554'
-    		};
-    	}
-      else {
-        console.log("Other platform");
-    		admobid = { // for Windows Phone
-    			banner: 'ca-app-pub-6699142760491850/5045443529',
-    			interstitial: 'ca-app-pub-6699142760491850/8733293122'
-    		};
-    	}
-
-        // preppare and load ad resource in background, e.g. at begining of game level
-      if(window.AdMob) window.AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
-
-      // show the interstitial later, e.g. at end of game level
-      if(window.AdMob) window.AdMob.showInterstitial();
+                $adMob.prepareInterstitial({
+                    adId: admobid.interstitial,
+                    autoShow: true
+                });
+                
+                if(window.AdMob) window.AdMob.showInterstitial();
+            }
   })
 })
 
