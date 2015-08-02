@@ -15,14 +15,14 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
 
-    function onLoad() {
-        if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
-            document.addEventListener('deviceready', initApp, false);
-        } else {
-            initApp();
-        }
+    if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
+        document.addEventListener('deviceready', initApp, false);
+    } else {
+        initApp();
     }
+
 	var admobid = {};
+  console.log("Testing for admobid");
 	if( /(android)/i.test(navigator.userAgent) ) {
 		admobid = { // for Android
 			banner: 'ca-app-pub-6699142760491850/5045443529',
@@ -37,13 +37,15 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
 	}
   else {
 		admobid = { // for Windows Phone
-			banner: 'ca-app-pub-6869992474017983/8878394753',
-			interstitial: 'ca-app-pub-6869992474017983/1355127956'
+      banner: 'ca-app-pub-6699142760491850/5045443529',
+			interstitial: 'ca-app-pub-6699142760491850/8733293122'
 		};
 	}
 
+  console.log(admobid);
+
     function initApp() {
-		  if (! AdMob ) { alert( 'admob plugin not ready' ); return; }
+		  if (! window.AdMob ) { alert( 'admob plugin not ready' ); return; }
   		initAd();
       // display the banner at startup
       createSelectedBanner();
@@ -82,7 +84,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
 
     if(window.AdMob) window.AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:true} );
     // show the interstitial later, e.g. at end of game level
-    //if(AdMob) AdMob.showInterstitial();
+    if(window.AdMob) AdMob.showInterstitial();
 
     // it will display smart banner at top center, using the default options
     if(window.AdMob) window.AdMob.createBanner( {
