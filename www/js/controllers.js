@@ -2,6 +2,7 @@ angular.module('directory.controllers', ['directory.services'])
 .controller('MainCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   $scope.prepareAds = function(){
     if(AdMob){
+      alert('Admob ready');
       var admobid = {};
       if( /(android)/i.test(navigator.userAgent) ) { // for android
           admobid = {
@@ -30,6 +31,9 @@ angular.module('directory.controllers', ['directory.services'])
 
       alert("Add banner shown");
     }
+  }
+  else {
+    alert('Admob not ready yet!');
   }
 
 })
