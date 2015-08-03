@@ -15,18 +15,20 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
 
+    if(window.plugins && window.plugins.AdMob) {
+        alert("Admob is set");
+    }
+    else{
+      alert("Admob is not set");
+    }
     /*admobSvcProvider.setOptions({
         publisherId:          "",  // Required
         interstitialAdId:     "ca-app-pub-6699142760491850/8733293122"
       });*/
 
-      admobSvc.createBannerView({ publisherId: "ca-app-pub-6699142760491850/5045443529" });
+      //admobSvc.createBannerView({ publisherId: "ca-app-pub-6699142760491850/5045443529" });
     //admob.initAdmob("ca-app-pub-6699142760491850/5045443529","ca-app-pub-6699142760491850/8733293122");//admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
     // Handle events:
-    $rootScope.$on('admob:' + admobSvc.events.onAdOpened, function onAdOpened(evt, e) {
-      alert("Banner shown");
-    });
-
 
   });
 
