@@ -15,26 +15,6 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
 
-    if(window.plugins && window.plugins.AdMob) {
-        alert("window pliguns Admob is set");
-    }
-    else{
-      alert("1");
-    }
-
-    if(AdMob){
-      alert("root admob");
-    }
-    else{
-      alert("2");
-    }
-
-    if(window.AdMob){
-      alert("window admob");
-    }
-    else{
-      alert("3");
-    }
     /*admobSvcProvider.setOptions({
         publisherId:          "",  // Required
         interstitialAdId:     "ca-app-pub-6699142760491850/8733293122"
