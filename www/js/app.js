@@ -38,7 +38,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
         // CREATE BANNER
       AdMob.createBanner( {
       adId: admobid.banner,
-      position: AdMob.AD_POSITION.BOTTOM_CENTER,
+      position: AdMob.AD_POSITION.TOP_CENTER,
       isTesting : true,
       autoShow: true } );
     }
