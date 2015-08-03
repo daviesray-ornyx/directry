@@ -53,10 +53,12 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       if(window.AdMob) window.AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
 
         // show the interstitial later, e.g. at end of game level
-      if(window.AdMob) window.AdMob.showInterstitial();
+      if(window.AdMob){
+        window.AdMob.showInterstitial();
       } else {
           alert( 'admob plugin not ready' );
       }
+
     }
 
 
