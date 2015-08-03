@@ -1,51 +1,6 @@
 angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
-  $scope.MessageTest
-  $scope.showData = function(){
-    if($window.plugins && $window.plugins.AdMob) {
-        $scope.MessageTest = "window pliguns Admob is set";
-    }
-    else if(AdMob){
-
-      // Show interstitial
-      var admobid = {};
-      if( /(android)/i.test(navigator.userAgent) ) { // for android
-        $scope.MessageTest = "android";
-          admobid = {
-              banner: 'ca-app-pub-6699142760491850/5045443529',
-              interstitial: 'ca-app-pub-6699142760491850/8733293122'
-          };
-      } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
-        $scope.MessageTest = "ios";
-          admobid = {
-            banner: 'ca-app-pub-6699142760491850/5045443529',
-            interstitial: 'ca-app-pub-6699142760491850/8733293122'
-          };
-      } else { // for windows phone
-          $scope.MessageTest = "wphonert";
-          admobid = {
-            banner: 'ca-app-pub-6699142760491850/5045443529',
-            interstitial: 'ca-app-pub-6699142760491850/8733293122'
-          };
-      }
-
-      AdMob.createBanner( {
-      adId: admobid.banner,
-      position: AdMob.AD_POSITION.TOP_CENTER,
-      autoShow: true } );
-
-      alert("Banner created");
-
-    }
-    else if($window.AdMob){
-      $scope.MessageTest = "window admob";
-    }
-    else{
-      $scope.MessageTest = "3";
-    }
-  }
-
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
   $scope.noContactMessage = ""
