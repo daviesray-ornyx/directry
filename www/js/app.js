@@ -3,8 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('directry', ['ionic', 'directory.controllers', 'directory.services', ])
-.run(function($ionicPlatform) {
+angular.module('directry', ['ionic', 'directory.controllers', 'directory.services', 'admobModule']]) // Add the adModule
+.run(function($ionicPlatform, admobSvc) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -15,12 +15,18 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
 
-    alert(admob);
-    admob.initAdmob("ca-app-pub-6699142760491850/5045443529","ca-app-pub-6699142760491850/8733293122");//admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
+    /*admobSvcProvider.setOptions({
+        publisherId:          "",  // Required
+        interstitialAdId:     "ca-app-pub-6699142760491850/8733293122"
+      });*/
 
-    admob.showBanner(admob.BannerSize.BANNER,admob.Position.TOP_APP);
+      admobSvc.createBannerView({ publisherId: "ca-app-pub-6699142760491850/5045443529" });
+    //admob.initAdmob("ca-app-pub-6699142760491850/5045443529","ca-app-pub-6699142760491850/8733293122");//admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
+    // Handle events:
+    $rootScope.$on('admob:' + admobSvc.events.onAdOpened, function onAdOpened(evt, e) {
+      alert("Banner shown");
+    });
 
-    alert("Banner shown");
 
   });
 

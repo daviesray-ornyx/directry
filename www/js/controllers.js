@@ -1,4 +1,7 @@
-angular.module('directory.controllers', ['directory.services'])
+angular.module('directory.controllers', ['directory.services')
+.controller('AdMobCtrl', function ($scope, $log, $cordovaPreferences) {
+
+});
 
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
