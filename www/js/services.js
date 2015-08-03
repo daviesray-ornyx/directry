@@ -1,4 +1,4 @@
-angular.module('directory.services',['ionic'])
+angular.module('directory.services',[])
   .factory('API', function($rootScope, $http, $ionicLoading, $window){  // this makes lists and other variables accessible to controllers
     var base = "http://directry-serv.azurewebsites.net";    // production
     //var base = "http://localhost:9804";    // development
@@ -62,12 +62,13 @@ angular.module('directory.services',['ionic'])
           autoShow: true } );
 
           // local store
+          window.isVisibleBannerView = true;
           $window.localStorage.addsInitialized = true;
         }
       }
       catch(err) {
         // Do nothing
-        console.log(err);
+        //console.log(err);
       }
     }
 

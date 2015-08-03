@@ -2,7 +2,7 @@ angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
 // Ads
-  if(!$rootScope.getAddsInitializedStatus())
+  if(!window.isVisibleBannerView)
     $rootScope.initializeAdd();
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
@@ -82,7 +82,7 @@ angular.module('directory.controllers', ['directory.services'])
 })
 .controller('DirectoryAllDetailCtrl', function($rootScope, $scope, API, $window){
   // Ads
-    if(!$rootScope.getAddsInitializedStatus())
+    if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
 
   $rootScope.show("Loading contacts");
@@ -94,7 +94,7 @@ angular.module('directory.controllers', ['directory.services'])
 })
 .controller('DirectoryEmergencyCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   // Ads
-    if(!$rootScope.getAddsInitializedStatus())
+    if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
       // Bootstraping app
   $scope.searchTerm = {};   // this is the search term
@@ -175,7 +175,7 @@ angular.module('directory.controllers', ['directory.services'])
 })
 .controller('DirectoryEmergencyDetailCtrl', function($rootScope, $scope, API, $window){
   // Ads
-    if(!$rootScope.getAddsInitializedStatus())
+    if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
   $rootScope.show("Loading contacts");
   $scope.contact = $rootScope.getCurrentContactDetail();
@@ -186,7 +186,7 @@ angular.module('directory.controllers', ['directory.services'])
 })
 .controller('DirectoryOfficesCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   // Ads
-    if(!$rootScope.getAddsInitializedStatus())
+    if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
     $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
@@ -264,7 +264,7 @@ angular.module('directory.controllers', ['directory.services'])
 })
 .controller('DirectoryOfficesDetailCtrl', function($rootScope, $scope, API, $window){
   // Ads
-    if(!$rootScope.getAddsInitializedStatus())
+    if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
   $rootScope.show("Loading contacts");
   $scope.contact = $rootScope.getCurrentContactDetail();
