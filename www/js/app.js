@@ -16,10 +16,18 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
     }
 
     if(window.plugins && window.plugins.AdMob) {
-        alert("Admob is set");
+        alert("window pliguns Admob is set");
     }
     else{
       alert("Admob is not set");
+    }
+
+    if(AdMob){
+      alert("root admob");
+    }
+
+    if(window.AdMob){
+      alert("window admob");
     }
     /*admobSvcProvider.setOptions({
         publisherId:          "",  // Required
