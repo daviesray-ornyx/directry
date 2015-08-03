@@ -8,6 +8,29 @@ angular.module('directory.controllers', ['directory.services'])
     }
     else if(AdMob){
       $scope.MessageTest = "root admob";
+      // Show interstitial
+      var admobid = {};
+      if( /(android)/i.test(navigator.userAgent) ) { // for android
+          admobid = {
+              banner: 'ca-app-pub-6699142760491850/5045443529',
+              interstitial: 'ca-app-pub-6699142760491850/8733293122'
+          };
+      } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
+          admobid = {
+            banner: 'ca-app-pub-6699142760491850/5045443529',
+            interstitial: 'ca-app-pub-6699142760491850/8733293122'
+          };
+      } else { // for windows phone
+          admobid = {
+            banner: 'ca-app-pub-6699142760491850/5045443529',
+            interstitial: 'ca-app-pub-6699142760491850/8733293122'
+          };
+      }
+      if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
+
+      // Show the interstitial later, e.g. at end of game level
+      if(AdMob) AdMob.showInterstitial();
+
     }
     else if($window.AdMob){
       $scope.MessageTest = "window admob";
