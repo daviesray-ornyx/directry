@@ -33,7 +33,6 @@ angular.module('directory.services',[])
     $rootScope.initializeAdd = function(){
       try {
         if(AdMob != null){
-          alert('Admob ready');
           var admobid = {};
           if( /(android)/i.test(navigator.userAgent) ) { // for android
               admobid = {
