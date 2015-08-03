@@ -15,45 +15,13 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
 
-    var bannerAdUnit;
-    var interstitialAdUnit;
-    var isOverlap = true; //true: overlap, false: split
-    var isTest = true;
-    //android
-    if (navigator.userAgent.match(/Android/i)) {
-        bannerAdUnit = "ca-app-pub-6699142760491850/5045443529";
-        interstitialAdUnit = "ca-app-pub-6699142760491850/8733293122";
-    }
-    //ios
-    else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-      bannerAdUnit = "ca-app-pub-6699142760491850/5045443529";
-      interstitialAdUnit = "ca-app-pub-6699142760491850/8733293122";
-    }
-    //wp8
-    else if( navigator.userAgent.match(/Windows Phone/i) ) {
-      bannerAdUnit = "ca-app-pub-6699142760491850/5045443529";
-      interstitialAdUnit = "ca-app-pub-6699142760491850/8733293122";
-    }
+    alert(admob);
+    admob.initAdmob("ca-app-pub-6699142760491850/5045443529","ca-app-pub-6699142760491850/8733293122");//admob id format ca-app-pub-xxxxxxxxxxxxxxxxxxx/xxxxxxxxxx
 
-    window.admob.setUp(bannerAdUnit, interstitialAdUnit, isOverlap, isTest);
+    admob.showBanner(admob.BannerSize.BANNER,admob.Position.TOP_APP);
 
-    window.admob.onInterstitialAdPreloaded = function() {
-        alert('onInterstitialAdPreloaded');
-    };
+    alert("Banner shown");
 
-    window.admob.onInterstitialAdLoaded = function() {
-        alert('onInterstitialAdLoaded');
-    };
-    window.admob.onInterstitialAdShown = function() {
-        alert('onInterstitialAdShown');
-    };
-    window.admob.onInterstitialAdHidden = function() {
-        alert('onInterstitialAdHidden');
-    };
-
-
-    window.admob.preloadInterstitialAd();//option, download ad previously for fast show
-    window.admob.showInterstitialAd();
   });
 
 })
