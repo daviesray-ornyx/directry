@@ -15,6 +15,51 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
 
+    if ( window.plugins && window.AdMob ) {
+      var ad_units = {
+        ios : {
+          banner: 'ca-app-pub-6699142760491850/5045443529', // or DFP format "/6253334/dfp_example_ad"
+          interstitial: 'ca-app-pub-6699142760491850/8733293122'
+        },
+        android : {
+          banner: 'ca-app-pub-6699142760491850/5045443529', // or DFP format "/6253334/dfp_example_ad"
+          interstitial: 'ca-app-pub-6699142760491850/8733293122'
+        },
+        wp8 : {
+          banner: 'ca-app-pub-6699142760491850/5045443529', // or DFP format "/6253334/dfp_example_ad"
+          interstitial: 'ca-app-pub-6699142760491850/8733293122'
+        }
+      };
+
+      var admobid = "";
+      if( /(android)/i.test(navigator.userAgent) ) {
+        admobid = ad_units.android;
+      } else if(/(iphone|ipad)/i.test(navigator.userAgent)) {
+        admobid = ad_units.ios;
+      } else {
+        admobid = ad_units.wp8;
+      }
+
+      window.AdMob.setOptions( {
+        publisherId: admobid.banner,
+        interstitialAdId: admobid.interstitial,
+        bannerAtTop: false, // set to true, to put banner at top
+        overlap: false, // set to true, to allow banner overlap webview
+        offsetTopBar: false, // set to true to avoid ios7 status bar overlap
+        isTesting: false, // receiving test ad
+        autoShow: true // auto show interstitial ad when loaded
+      });
+
+      if(window.AdMob) window.AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
+
+        // show the interstitial later, e.g. at end of game level
+      if(window.AdMob) window.AdMob.showInterstitial();
+      } else {
+          alert( 'admob plugin not ready' );
+      }
+    }
+
+
   });
 
 })
