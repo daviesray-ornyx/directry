@@ -1,7 +1,6 @@
 angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory,$ionicNavBarDelegate, API, $window){
 
-  $ionicNavBarDelegate.showBar(false);
 // Ads
   if(!window.isVisibleBannerView)
     $rootScope.initializeAdd();
@@ -18,7 +17,7 @@ angular.module('directory.controllers', ['directory.services'])
   // check for update date... if equals never, display modal to pull latest content
   if($scope.updateDate == ': Never'){
     // propmt for update
-    $rootScope.notify("You have not synced your directory. Pull content to sync..");
+    //$rootScope.notify("You have not synced your directory. Pull content to sync..");
   }
 
   if($ionicHistory.backView()){ // Not initial load..
@@ -107,7 +106,7 @@ angular.module('directory.controllers', ['directory.services'])
   // check for update date... if equals never, display modal to pull latest content
   if($scope.updateDate == ': Never'){
     // propmt for update
-    $rootScope.notify("You have not synced your directory. Pull content to sync..");
+    //$rootScope.notify("You have not synced your directory. Pull content to sync..");
   }
 
   $scope.showSearchPrompt = function(){
@@ -197,7 +196,7 @@ angular.module('directory.controllers', ['directory.services'])
   // check for update date... if equals never, display modal to pull latest content
   if($scope.updateDate == ': Never'){
     // propmt for update
-    $rootScope.notify("You have not synced your directory. Pull content to sync..");
+    //$rootScope.notify("You have not synced your directory. Pull content to sync..");
   }
 
   if($ionicHistory.backView()){ // Not initial load..
