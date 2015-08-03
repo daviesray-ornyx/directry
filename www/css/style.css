@@ -42,7 +42,7 @@
 .tab-item{
   background-color: #0C85A7 !important;
   color: #FFF !important;
-  border-bottom-color: #0C85A7 !important;
+  border-top-color: #0C85A7 !important;
   opacity: 1 !important;
   border-width: 0px !important;
 
@@ -50,8 +50,8 @@
 
 .tab-item.active, .tab-item.activated, .tab-item-active {
   background-color: #0C85A7 !important;
-  color: #FFF !important;
-  border-bottom-color: #FFF !important;
+  color: #CCC !important;
+  border-top-color: #0C85A7 !important;
   opacity: 1 !important;
   border-width: 0px !important;
 }

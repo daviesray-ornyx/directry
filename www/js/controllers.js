@@ -1,6 +1,7 @@
 angular.module('directory.controllers', ['directory.services'])
-.controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
+.controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory,$ionicNavBarDelegate, API, $window){
 
+  $ionicNavBarDelegate.showBar(false);
 // Ads
   if(!window.isVisibleBannerView)
     $rootScope.initializeAdd();

@@ -30,7 +30,6 @@ angular.module('directory.services',[])
       }, 1999);
     };
 
-
     $rootScope.initializeAdd = function(){
       try {
         if(AdMob != null){
@@ -92,7 +91,6 @@ angular.module('directory.services',[])
       return today;
     }
 
-
     $rootScope.setUpdateDate = function(){
       var today = new Date();
       var dd = today.getDate();
@@ -108,7 +106,6 @@ angular.module('directory.services',[])
       var today = dd+'/'+mm+'/'+yyyy;
       $window.localStorage.updateDate = today;
     }
-
 
     $rootScope.getUpdateDate = function(){
       return $window.localStorage.updateDate || ': Never';

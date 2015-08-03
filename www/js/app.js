@@ -22,7 +22,8 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
 
 })
 
-.config(function($stateProvider, $urlRouterProvider){
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
+  $ionicConfigProvider.tabs.position('bottom'); // other values: top
   $stateProvider
     .state('tab', {
       url: "/tab",
