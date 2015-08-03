@@ -31,11 +31,10 @@ angular.module('directory.controllers', ['directory.services'])
 
       alert("Add banner shown");
     }
+    else {
+      alert('Admob not ready yet!');
+    }
   }
-  else {
-    alert('Admob not ready yet!');
-  }
-
 })
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
