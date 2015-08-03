@@ -1,6 +1,22 @@
 angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
+  $scope.MessageTest
+  $scope.showData = function(){
+    if($window.plugins && $window.plugins.AdMob) {
+        $scope.MessageTest = "window pliguns Admob is set";
+    }
+    else if(AdMob){
+      $scope.MessageTest = "root admob";
+    }
+    else if($window.AdMob){
+      $scope.MessageTest = "window admob";
+    }
+    else{
+      $scope.MessageTest = "3";
+    }
+  }
+
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
   $scope.noContactMessage = ""
