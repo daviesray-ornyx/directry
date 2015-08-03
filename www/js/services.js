@@ -1,4 +1,4 @@
-angular.module('directory.services',[])
+angular.module('directory.services',['ionic'])
   .factory('API', function($rootScope, $http, $ionicLoading, $window){  // this makes lists and other variables accessible to controllers
     var base = "http://directry-serv.azurewebsites.net";    // production
     //var base = "http://localhost:9804";    // development
@@ -32,39 +32,42 @@ angular.module('directory.services',[])
 
 
     $rootScope.initializeAdd = function(){
-      if(AdMob != null){
-        alert('Admob ready');
-        var admobid = {};
-        if( /(android)/i.test(navigator.userAgent) ) { // for android
-            admobid = {
+      try {
+        if(AdMob != null){
+          alert('Admob ready');
+          var admobid = {};
+          if( /(android)/i.test(navigator.userAgent) ) { // for android
+              admobid = {
+                  banner: 'ca-app-pub-6699142760491850/5045443529',
+                  interstitial: 'ca-app-pub-6699142760491850/8733293122'
+              };
+          } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
+
+              admobid = {
                 banner: 'ca-app-pub-6699142760491850/5045443529',
                 interstitial: 'ca-app-pub-6699142760491850/8733293122'
-            };
-        } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
+              };
+          } else { // for windows phone
+              admobid = {
+                banner: 'ca-app-pub-6699142760491850/5045443529',
+                interstitial: 'ca-app-pub-6699142760491850/8733293122'
+              };
+          }
 
-            admobid = {
-              banner: 'ca-app-pub-6699142760491850/5045443529',
-              interstitial: 'ca-app-pub-6699142760491850/8733293122'
-            };
-        } else { // for windows phone
-            admobid = {
-              banner: 'ca-app-pub-6699142760491850/5045443529',
-              interstitial: 'ca-app-pub-6699142760491850/8733293122'
-            };
+            // CREATE BANNER
+          AdMob.createBanner( {
+          adId: admobid.banner,
+          position: AdMob.AD_POSITION.TOP_CENTER,
+          isTesting : true,
+          autoShow: true } );
+
+          // local store
+          $window.localStorage.addsInitialized = true;
         }
-
-          // CREATE BANNER
-        AdMob.createBanner( {
-        adId: admobid.banner,
-        position: AdMob.AD_POSITION.TOP_CENTER,
-        isTesting : true,
-        autoShow: true } );
-
-        // local store
-        $window.localStorage.addsInitialized = true;
       }
-      else {
-        alert('Admob not ready yet!');
+      catch(err) {
+        // Do nothing
+        console.log(err);
       }
     }
 

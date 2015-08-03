@@ -188,7 +188,7 @@ angular.module('directory.controllers', ['directory.services'])
   // Ads
     if(!$rootScope.getAddsInitializedStatus())
       $rootScope.initializeAdd();
-  $scope.searchTerm = {};   // this is the search term
+    $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
   $scope.noContactMessage = ""
   $scope.updateDate = $rootScope.getUpdateDate();
