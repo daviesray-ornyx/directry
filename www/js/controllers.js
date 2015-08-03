@@ -1,8 +1,4 @@
-angular.module('directory.controllers', ['directory.services')
-.controller('AdMobCtrl', function ($scope, $log, $cordovaPreferences) {
-
-});
-
+angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
   $scope.searchTerm = {};   // this is the search term
