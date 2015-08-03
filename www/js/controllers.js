@@ -7,29 +7,35 @@ angular.module('directory.controllers', ['directory.services'])
         $scope.MessageTest = "window pliguns Admob is set";
     }
     else if(AdMob){
-      $scope.MessageTest = "root admob";
+
       // Show interstitial
       var admobid = {};
       if( /(android)/i.test(navigator.userAgent) ) { // for android
+        $scope.MessageTest = "android";
           admobid = {
               banner: 'ca-app-pub-6699142760491850/5045443529',
               interstitial: 'ca-app-pub-6699142760491850/8733293122'
           };
       } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
+        $scope.MessageTest = "ios";
           admobid = {
             banner: 'ca-app-pub-6699142760491850/5045443529',
             interstitial: 'ca-app-pub-6699142760491850/8733293122'
           };
       } else { // for windows phone
+          $scope.MessageTest = "wphonert";
           admobid = {
             banner: 'ca-app-pub-6699142760491850/5045443529',
             interstitial: 'ca-app-pub-6699142760491850/8733293122'
           };
       }
-      if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
 
-      // Show the interstitial later, e.g. at end of game level
-      if(AdMob) AdMob.showInterstitial();
+      AdMob.createBanner( {
+      adId: admobid.banner,
+      position: AdMob.AD_POSITION.TOP_CENTER,
+      autoShow: true } );
+
+      alert("Banner created");
 
     }
     else if($window.AdMob){
