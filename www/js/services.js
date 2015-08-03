@@ -30,6 +30,48 @@ angular.module('directory.services',[])
       }, 1999);
     };
 
+
+    $rootScope.initializeAdd = function(){
+      if(AdMob != null){
+        alert('Admob ready');
+        var admobid = {};
+        if( /(android)/i.test(navigator.userAgent) ) { // for android
+            admobid = {
+                banner: 'ca-app-pub-6699142760491850/5045443529',
+                interstitial: 'ca-app-pub-6699142760491850/8733293122'
+            };
+        } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
+
+            admobid = {
+              banner: 'ca-app-pub-6699142760491850/5045443529',
+              interstitial: 'ca-app-pub-6699142760491850/8733293122'
+            };
+        } else { // for windows phone
+            admobid = {
+              banner: 'ca-app-pub-6699142760491850/5045443529',
+              interstitial: 'ca-app-pub-6699142760491850/8733293122'
+            };
+        }
+
+          // CREATE BANNER
+        AdMob.createBanner( {
+        adId: admobid.banner,
+        position: AdMob.AD_POSITION.TOP_CENTER,
+        isTesting : true,
+        autoShow: true } );
+
+        // local store
+        $window.localStorage.addsInitialized = true;
+      }
+      else {
+        alert('Admob not ready yet!');
+      }
+    }
+
+    $rootScope.getAddsInitializedStatus = function(){
+      return $window.localStorage.addsInitialized || false;
+    }
+
     $rootScope.generateCurrentDate = function(){
       var today = new Date();
       var dd = today.getDate();

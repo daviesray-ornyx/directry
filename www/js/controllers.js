@@ -1,43 +1,9 @@
 angular.module('directory.controllers', ['directory.services'])
-.controller('MainCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
-  $scope.prepareAds = function(){
-    if(AdMob){
-      alert('Admob ready');
-      var admobid = {};
-      if( /(android)/i.test(navigator.userAgent) ) { // for android
-          admobid = {
-              banner: 'ca-app-pub-6699142760491850/5045443529',
-              interstitial: 'ca-app-pub-6699142760491850/8733293122'
-          };
-      } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
-
-          admobid = {
-            banner: 'ca-app-pub-6699142760491850/5045443529',
-            interstitial: 'ca-app-pub-6699142760491850/8733293122'
-          };
-      } else { // for windows phone
-          admobid = {
-            banner: 'ca-app-pub-6699142760491850/5045443529',
-            interstitial: 'ca-app-pub-6699142760491850/8733293122'
-          };
-      }
-
-        // CREATE BANNER
-      AdMob.createBanner( {
-      adId: admobid.banner,
-      position: AdMob.AD_POSITION.TOP_CENTER,
-      isTesting : true,
-      autoShow: true } );
-
-      alert("Add banner shown");
-    }
-    else {
-      alert('Admob not ready yet!');
-    }
-  }
-})
 .controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
+// Ads
+  if(!$rootScope.getAddsInitializedStatus())
+    $rootScope.initializeAdd();
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
   $scope.noContactMessage = ""
@@ -115,6 +81,10 @@ angular.module('directory.controllers', ['directory.services'])
 
 })
 .controller('DirectoryAllDetailCtrl', function($rootScope, $scope, API, $window){
+  // Ads
+    if(!$rootScope.getAddsInitializedStatus())
+      $rootScope.initializeAdd();
+
   $rootScope.show("Loading contacts");
   $scope.contact = $rootScope.getCurrentContactDetail();
   $scope.picUrl = $rootScope.fullProfileImagePath($scope.contact.pic);
@@ -123,7 +93,10 @@ angular.module('directory.controllers', ['directory.services'])
   $rootScope.hide();
 })
 .controller('DirectoryEmergencyCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
-  // Bootstraping app
+  // Ads
+    if(!$rootScope.getAddsInitializedStatus())
+      $rootScope.initializeAdd();
+      // Bootstraping app
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
   $scope.noContactMessage = ""
@@ -201,6 +174,9 @@ angular.module('directory.controllers', ['directory.services'])
 
 })
 .controller('DirectoryEmergencyDetailCtrl', function($rootScope, $scope, API, $window){
+  // Ads
+    if(!$rootScope.getAddsInitializedStatus())
+      $rootScope.initializeAdd();
   $rootScope.show("Loading contacts");
   $scope.contact = $rootScope.getCurrentContactDetail();
   $scope.picUrl = $rootScope.fullProfileImagePath($scope.contact.pic);
@@ -209,6 +185,9 @@ angular.module('directory.controllers', ['directory.services'])
   $rootScope.hide();
 })
 .controller('DirectoryOfficesCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
+  // Ads
+    if(!$rootScope.getAddsInitializedStatus())
+      $rootScope.initializeAdd();
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
   $scope.noContactMessage = ""
@@ -284,6 +263,9 @@ angular.module('directory.controllers', ['directory.services'])
 
 })
 .controller('DirectoryOfficesDetailCtrl', function($rootScope, $scope, API, $window){
+  // Ads
+    if(!$rootScope.getAddsInitializedStatus())
+      $rootScope.initializeAdd();
   $rootScope.show("Loading contacts");
   $scope.contact = $rootScope.getCurrentContactDetail();
   $scope.picUrl = $rootScope.fullProfileImagePath($scope.contact.pic);
