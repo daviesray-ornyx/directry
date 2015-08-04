@@ -3,7 +3,7 @@ angular.module('directory.services',[])
     var base = "http://directry-serv.azurewebsites.net";    // production
     //var base = "http://localhost:9804";    // development
 
-    
+
 
     var allLoaded = false;
     var allContactProfiles = [];
@@ -137,16 +137,17 @@ angular.module('directory.services',[])
         var prof = list[profIndex]; // get profile at indexOf
         var addProfile = false;
         var matchCount = 0;
+        // add if matchCount == length of searchTermsArray
         for (var stermIndex in searchTermsArray) {
           var sterm = searchTermsArray[stermIndex];
           // look for specific properties
           if (prof.hasOwnProperty('name')) {  // profile has property name
-            if(prof['name'].toLowerCase().indexOf(String(sterm).toLowerCase()) > -1 ){  // contains term
+            if(prof['name'].toLowerCase().indexOf(String(sterm).toLowerCase()) > -1 )
               matchCount = matchCount + 1;
-              addProfile = true;
-            }
           }
         } // end of testing for searchTerm
+        if(matchCount == searchTermsArray.length)
+          addProfile = true;
         // Start testing for category
         if(prof.hasOwnProperty('category') && category.toLowerCase() != "all") {
           if(category.toLowerCase() != prof.category.toLowerCase()){

@@ -49,7 +49,6 @@ angular.module('directory.controllers', ['directory.services'])
         $rootScope.hide();
       })
       .error(function(err){
-        console.log(err);
         $rootScope.hide();
       })
     }
