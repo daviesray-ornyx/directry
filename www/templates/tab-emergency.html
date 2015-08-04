@@ -17,12 +17,13 @@
           <input type="search" placeholder="County e.g. Nairobi" ng-model="searchTerm.county">
         </div>
       </div>
-    </div>
-    <div class="row" style="border:none !important;">
-      <div class="col button button-clear" ng-click="searchAll()" style="border:none; background-color:#0C85A7; color:#FFF; opacity:0.8">
-        <span>Search</span>
+      <div class="bar item-input-inset" style="background:transparent;border:none;">
+        <div class="col button button-clear" ng-click="searchAll()" style="border:none; background-color:#0C85A7; color:#FFF; opacity:0.6">
+          <span>Search</span>
+        </div>
       </div>
     </div>
+
     <ion-list ng-hide="showSearchPrompt()">
       <ion-item ng-repeat="contact in directory" ng-click="showDetail({{contact}})" >
         <h2>
