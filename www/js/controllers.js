@@ -19,6 +19,8 @@ angular.module('directory.controllers', ['directory.services'])
 
 
   $scope.searchAll = function(){
+    if(!window.isVisibleBannerView)
+      $rootScope.initializeAdd();
     // get search term
     if(!$scope.searchTerm.text || $scope.searchTerm.text == '')
     {
@@ -33,6 +35,8 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.updateDirectory = function(){
+    if(!window.isVisibleBannerView)
+      $rootScope.initializeAdd();
     // check if update is necessary
     if($scope.updateDate == $rootScope.generateCurrentDate()){
       // Directry up to date
@@ -59,6 +63,8 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.resetSearch = function(){  // Resets everything
+    if(!window.isVisibleBannerView)
+      $rootScope.initializeAdd();
     $scope.directory = [];
     $scope.searchTerm.text = "";
     $scope.searchTerm.location = "";
@@ -66,6 +72,9 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
   $scope.resetLocation = function(){  // resets location only and refines the search
+    if(!window.isVisibleBannerView)
+      $rootScope.initializeAdd();
+
     $scope.directory = [];
     $scope.searchTerm.county = "";
 
@@ -103,6 +112,9 @@ angular.module('directory.controllers', ['directory.services'])
   $rootScope.hide();
 
   $scope.goBack = function(){
+    if(!window.isVisibleBannerView)
+      $rootScope.initializeAdd();
+      
     if($ionicHistory.backView()){ // Not initial load..
       $ionicHistory.goBack(-1);
     }

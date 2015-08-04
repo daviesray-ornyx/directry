@@ -15,9 +15,6 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       StatusBar.styleDefault();
     }
 
-    window.isVisibleBannerView = false;
-    window.isVisibleInterstitialView = false;
-
   });
 
 })

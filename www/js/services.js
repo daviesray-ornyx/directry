@@ -33,48 +33,43 @@ angular.module('directory.services',[])
 
 
     $rootScope.initializeAdd = function(){
-      var ready = false;  // repeats till ads are shown
-      while (!ready) {
-        try {
-          if(AdMob != null){
-            var admobid = {};
-            if( /(android)/i.test(navigator.userAgent) ) { // for android
-                admobid = {
-                    banner: 'ca-app-pub-6699142760491850/5045443529',
-                    interstitial: 'ca-app-pub-6699142760491850/8733293122'
-                };
-            } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
-
-                admobid = {
+      try {
+        if(AdMob != null){
+          var admobid = {};
+          if( /(android)/i.test(navigator.userAgent) ) { // for android
+              admobid = {
                   banner: 'ca-app-pub-6699142760491850/5045443529',
                   interstitial: 'ca-app-pub-6699142760491850/8733293122'
-                };
-            } else { // for windows phone
-                admobid = {
-                  banner: 'ca-app-pub-6699142760491850/5045443529',
-                  interstitial: 'ca-app-pub-6699142760491850/8733293122'
-                };
-            }
+              };
+          } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
 
-              // CREATE BANNER
-            AdMob.createBanner( {
-            adId: admobid.banner,
-            position: AdMob.AD_POSITION.TOP_CENTER,
-            isTesting : true,
-            autoShow: true } );
-
-            // local store
-            ready = true;
-            window.isVisibleBannerView = true;
-            $window.localStorage.addsInitialized = true;
+              admobid = {
+                banner: 'ca-app-pub-6699142760491850/5045443529',
+                interstitial: 'ca-app-pub-6699142760491850/8733293122'
+              };
+          } else { // for windows phone
+              admobid = {
+                banner: 'ca-app-pub-6699142760491850/5045443529',
+                interstitial: 'ca-app-pub-6699142760491850/8733293122'
+              };
           }
-        }
-        catch(err) {
-          // Do nothing
-          //console.log(err);
+
+            // CREATE BANNER
+          AdMob.createBanner( {
+          adId: admobid.banner,
+          position: AdMob.AD_POSITION.TOP_CENTER,
+          isTesting : true,
+          autoShow: true } );
+
+          // local store
+          window.isVisibleBannerView = true;
+          $window.localStorage.addsInitialized = true;
         }
       }
-
+      catch(err) {
+        // Do nothing
+        //console.log(err);
+      }
     }
 
     $rootScope.getAddsInitializedStatus = function(){
