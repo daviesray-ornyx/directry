@@ -1,10 +1,8 @@
 <ion-view>
-  <ion-nav-title>
-    <div class="item page-nav-title">
-      <span class="white-text" style="padding-left: 1px !important;"></span>
-    </div>
-  </ion-nav-title>
-  <ion-content class="padding">
+  <ion-content >
+    <a class="item item-icon-left temp-header" href="#">
+      <i class="icon ion-android-arrow-back" ng-click="goBack()"></i>
+    </a>
     <div class="item item-avatar">
       <img src="{{picUrl}}">
       <h2><strong>{{contact.name}}</strong></h2>

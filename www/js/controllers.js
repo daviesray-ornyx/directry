@@ -1,5 +1,5 @@
 angular.module('directory.controllers', ['directory.services'])
-.controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory,$ionicNavBarDelegate, API, $window){
+.controller('DirectoryAllCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
 // Ads
   if(!window.isVisibleBannerView)
@@ -20,9 +20,6 @@ angular.module('directory.controllers', ['directory.services'])
     //$rootScope.notify("You have not synced your directory. Pull content to sync..");
   }
 
-  if($ionicHistory.backView()){ // Not initial load..
-    $ionicHistory.clearHistory(); // Clear history  // rest of things remain same for now
-  }
 
   $scope.searchAll = function(){
     // get search term
@@ -80,7 +77,7 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
 })
-.controller('DirectoryAllDetailCtrl', function($rootScope, $scope, API, $window){
+.controller('DirectoryAllDetailCtrl', function($rootScope, $ionicHistory, $scope, API, $window){
   // Ads
     if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
@@ -91,6 +88,12 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.contactDetails = $rootScope.getCurrentContactList($scope.contact.userId);
   $scope.contactCount = $scope.contactDetails.length;
   $rootScope.hide();
+
+  $scope.goBack = function(){
+    if($ionicHistory.backView()){ // Not initial load..
+      $ionicHistory.goBack(-1);
+    }
+  }
 })
 .controller('DirectoryEmergencyCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   // Ads
@@ -173,7 +176,7 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
 })
-.controller('DirectoryEmergencyDetailCtrl', function($rootScope, $scope, API, $window){
+.controller('DirectoryEmergencyDetailCtrl', function($rootScope, $ionicHistory, $scope, API, $window){
   // Ads
     if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
@@ -183,6 +186,12 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.contactDetails = $rootScope.getCurrentContactList($scope.contact.userId);
   $scope.contactCount = $scope.contactDetails.length;
   $rootScope.hide();
+
+  $scope.goBack = function(){
+    if($ionicHistory.backView()){ // Not initial load..
+      $ionicHistory.goBack(-1);
+    }
+  }
 })
 .controller('DirectoryOfficesCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
   // Ads
@@ -262,7 +271,7 @@ angular.module('directory.controllers', ['directory.services'])
   }
 
 })
-.controller('DirectoryOfficesDetailCtrl', function($rootScope, $scope, API, $window){
+.controller('DirectoryOfficesDetailCtrl', function($rootScope, $ionicHistory, $scope, API, $window){
   // Ads
     if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
@@ -272,4 +281,10 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.contactDetails = $rootScope.getCurrentContactList($scope.contact.userId);
   $scope.contactCount = $scope.contactDetails.length;
   $rootScope.hide();
+
+  $scope.goBack = function(){
+    if($ionicHistory.backView()){ // Not initial load..
+      $ionicHistory.goBack(-1);
+    }
+  }
 })

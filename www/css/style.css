@@ -1,8 +1,17 @@
+.top-wrapper{
+  background-image: url(../img/bg_die.jpg);
+  width: 100%;
+  height: auto;
+}
+
 .temp-header{
   width: 100%;
   height: 45px;
-  background-image: url(../img/bg_die.jpg);
   color: #FFF !important;
+  background-image: url(../img/bg_die.jpg);
+  border: none !important;
+  border-width: 0px;
+  border-color: transparent;
 }
 
 .page-header{
