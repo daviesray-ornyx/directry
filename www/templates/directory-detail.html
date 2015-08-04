@@ -1,18 +1,16 @@
-<ion-view >
+<ion-view style="background-image:url(./img/bg_large.jpg);">
   <ion-content>
-    <a class="item item-icon-left back-header" href="#">
-      <i class="icon ion-android-arrow-back" ng-click="goBack()"></i>
-    </a>
-    <div class="item item-avatar">
-      <img src="{{picUrl}}">
-      <h2><strong>{{contact.name}}</strong></h2>
-      <p>Address</p>
+    <div class="item item-icon-left back-header" href="#">
+      <span>
+        <i class="icon ion-android-arrow-back" ng-click="goBack()"></i>
+        <h2 class="elipsis-text" style="color:#FFF;"><strong>{{contact.name}}</strong></h2>
+        <p style="color:#CCC;">{{contact.address}} <span class="badge badge-assertive background-theme-color">{{contactCount}}</span></p>
+
+      </span>
     </div>
+
     <ion-list>
-      <div class="item item-divider">
-        CONTACTS <span class="badge badge-assertive background-theme-color">{{contactCount}}</span>
-      </div>
-      <ion-item class="item item-icon-left item-icon-right" ng-repeat="detail in contactDetails" ng-click="triggerAction({{contact}})" >
+      <ion-item class="item item-icon-left item-icon-right" ng-repeat="detail in contactDetails" ng-click="triggerAction({{contact}})" style="background:transparent;border-bottom-width:1px;border-bottom-color:#999;border-top-width:1px;border-top-color:#999;margin:auto 10px;">
         <i class="icon ion-android-contact"></i>
         <h2>
           {{detail.value}}
