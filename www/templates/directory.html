@@ -6,24 +6,25 @@
         <span style="float:right;" ng-click="updateDirectory()">Update</span>
         <i class="icon ion-ios-cloud-download-outline" ng-click="updateDirectory()"></i>
       </a>
-
-      <div class="bar item-input-inset" style="background:transparent;border:none;">
-        <div class="item-input-wrapper">
-          <input type="search" placeholder="Name e.g. Kenyatta National Hospital" ng-model="searchTerm.text">
-          <i class="icon ion-close-round placeholder-icon" ng-show="searchTerm.text.length" ng-click="resetSearch()"></i>
+      <form ng-submit="searchAll()">
+        <div class="bar item-input-inset" style="background:transparent;border:none;">
+          <div class="item-input-wrapper">
+            <input type="search" placeholder="Name e.g. Kenyatta National Hospital" ng-model="searchTerm.text">
+            <i class="icon ion-close-round placeholder-icon" ng-show="searchTerm.text.length" ng-click="resetSearch()"></i>
+          </div>
         </div>
-      </div>
-      <div class="bar item-input-inset" style="background:transparent;border:none;">
-        <div class="item-input-wrapper">
-          <input type="search" placeholder="County e.g. Nairobi" ng-model="searchTerm.county">
-          <i class="icon ion-close-round placeholder-icon" ng-show="searchTerm.county.length" ng-click="resetLocation()"></i>
+        <div class="bar item-input-inset" style="background:transparent;border:none;">
+          <div class="item-input-wrapper">
+            <input type="search" placeholder="County e.g. Nairobi" ng-model="searchTerm.county">
+            <i class="icon ion-close-round placeholder-icon" ng-show="searchTerm.county.length" ng-click="resetLocation()"></i>
+          </div>
         </div>
-      </div>
-      <div class="bar item-input-inset" style="background:transparent;border:none;">
-        <div class="col button button-clear" ng-click="searchAll()" style="border:none; background-color:#0C85A7; color:#FFF; opacity:0.6">
-          <span>Search</span>
+        <div class="bar item-input-inset" style="background:transparent;border:none;">
+          <button class="col button button-clear" type=submit ng-click="searchAll()" style="border:none; background-color:#0C85A7; color:#FFF; opacity:0.6">
+            <span>Search</span>
+          </button>
         </div>
-      </div>
+      </form>
     </div>
 
     <ion-list>

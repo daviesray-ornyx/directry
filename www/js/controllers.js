@@ -30,10 +30,7 @@ angular.module('directory.controllers', ['directory.services'])
     else{
       $rootScope.show("Loading...");
       $scope.directory = $rootScope.getProfileList($scope.searchTerm.text, "All", $scope.searchTerm.county || '');
-      // set search result message
-      //
       $scope.resultsMessage = $scope.directory.length + " results for " + $scope.searchTerm.text + " in "  + ($scope.searchTerm.county ? $scope.searchTerm.county + " county" : " all counties") ;
-      console.log($scope.resultsMessage);
       $rootScope.hide();
     }
   }
