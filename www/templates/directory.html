@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view style="background-image:url(./img/bg_large.jpg);">
   <ion-content >
     <div class="item top-wrapper">
       <a class="item item-icon-right temp-header" href="#" >
@@ -27,7 +27,10 @@
     </div>
 
     <ion-list>
-      <ion-item ng-repeat="contact in directory | orderBy : matchCount" ng-click="showDetail({{contact}})" >
+      <ion-item style="text-align:center;background:transparent;" ng-show="resultsMessage.length">
+        <span >{{resultsMessage}}</span>
+      </ion-item>
+      <ion-item ng-repeat="contact in directory | orderBy : matchCount" ng-click="showDetail({{contact}})" style="background:transparent;border-bottom-width:2px;border-bottom-color:#999;margin:auto 10px;">
         <h2>
           <strong>{{contact.name}}</strong>
         </h2>

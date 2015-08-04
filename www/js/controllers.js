@@ -6,7 +6,7 @@ angular.module('directory.controllers', ['directory.services'])
     $rootScope.initializeAdd();
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
-  $scope.noContactMessage = ""
+  $scope.resultsMessage = "Enter Name and County then press search...";
 
   $scope.showSearchPrompt = function(){
     return $scope.directory.length > 0 ? false : true;
@@ -30,7 +30,10 @@ angular.module('directory.controllers', ['directory.services'])
     else{
       $rootScope.show("Loading...");
       $scope.directory = $rootScope.getProfileList($scope.searchTerm.text, "All", $scope.searchTerm.county || '');
-      $scope.noContactMessage = $scope.directory.length < 1 ? "Zero Contacts found... Refine your search." : "";
+      // set search result message
+      //
+      $scope.resultsMessage = $scope.directory.length + " results for " + $scope.searchTerm.text + " in "  + ($scope.searchTerm.county ? $scope.searchTerm.county + " county" : " all counties") ;
+      console.log($scope.resultsMessage);
       $rootScope.hide();
     }
   }
@@ -65,12 +68,16 @@ angular.module('directory.controllers', ['directory.services'])
     $scope.directory = [];
     $scope.searchTerm.text = "";
     $scope.searchTerm.location = "";
+    $scope.resultsMessage = "Enter Name and County then press search..."
   }
 
   $scope.resetLocation = function(){  // resets location only and refines the search
     $scope.directory = [];
     $scope.searchTerm.county = "";
 
+    // Check if name is populated
+    if(!$scope.searchTerm.text || $scope.searchTerm.text == '')
+      return;
     $scope.searchAll();
 
   }
