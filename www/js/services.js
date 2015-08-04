@@ -30,45 +30,50 @@ angular.module('directory.services',[])
       }, 1999);
     };
 
+
+
     $rootScope.initializeAdd = function(){
-      try {
-        if(AdMob != null){
-          var admobid = {};
-          if( /(android)/i.test(navigator.userAgent) ) { // for android
-              admobid = {
+      var ready = false;  // repeats till ads are shown
+      while (!ready) {
+        try {
+          if(AdMob != null){
+            var admobid = {};
+            if( /(android)/i.test(navigator.userAgent) ) { // for android
+                admobid = {
+                    banner: 'ca-app-pub-6699142760491850/5045443529',
+                    interstitial: 'ca-app-pub-6699142760491850/8733293122'
+                };
+            } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
+
+                admobid = {
                   banner: 'ca-app-pub-6699142760491850/5045443529',
                   interstitial: 'ca-app-pub-6699142760491850/8733293122'
-              };
-          } else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios
+                };
+            } else { // for windows phone
+                admobid = {
+                  banner: 'ca-app-pub-6699142760491850/5045443529',
+                  interstitial: 'ca-app-pub-6699142760491850/8733293122'
+                };
+            }
 
-              admobid = {
-                banner: 'ca-app-pub-6699142760491850/5045443529',
-                interstitial: 'ca-app-pub-6699142760491850/8733293122'
-              };
-          } else { // for windows phone
-              admobid = {
-                banner: 'ca-app-pub-6699142760491850/5045443529',
-                interstitial: 'ca-app-pub-6699142760491850/8733293122'
-              };
+              // CREATE BANNER
+            AdMob.createBanner( {
+            adId: admobid.banner,
+            position: AdMob.AD_POSITION.TOP_CENTER,
+            isTesting : true,
+            autoShow: true } );
+
+            // local store
+            ready = true;
+            $window.localStorage.addsInitialized = true;
           }
-
-            // CREATE BANNER
-          AdMob.createBanner( {
-          adId: admobid.banner,
-          position: AdMob.AD_POSITION.TOP_CENTER,
-          isTesting : true,
-          autoShow: true } );
-
-          AdMob.showBanner(); // to show banner
-          // local store
-          window.isVisibleBannerView = true;
-          $window.localStorage.addsInitialized = true;
+        }
+        catch(err) {
+          // Do nothing
+          //console.log(err);
         }
       }
-      catch(err) {
-        // Do nothing
-        //console.log(err);
-      }
+
     }
 
     $rootScope.getAddsInitializedStatus = function(){

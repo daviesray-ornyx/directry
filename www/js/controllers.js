@@ -1,9 +1,6 @@
 angular.module('directory.controllers', ['directory.services'])
 .controller('DirectoryCtrl', function($rootScope, $scope, $ionicHistory, API, $window){
 
-// Ads
-  if(!window.isVisibleBannerView)
-    $rootScope.initializeAdd();
   $scope.searchTerm = {};   // this is the search term
   $scope.directory = [];
   $scope.resultsMessage = "Enter Name and County then press search...";
@@ -89,9 +86,12 @@ angular.module('directory.controllers', ['directory.services'])
     $window.location.href = ("#/directory/detail");
   }
 
+  // Initialize add
+  if(!window.isVisibleBannerView)
+    $rootScope.initializeAdd();
 })
 .controller('DirectoryDetailCtrl', function($rootScope, $ionicHistory, $scope, API, $window){
-  // Ads
+    // Initialize add
     if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
 
