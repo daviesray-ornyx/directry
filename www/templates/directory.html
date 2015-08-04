@@ -31,7 +31,7 @@
       <ion-item style="text-align:center;background:transparent;border:none;" ng-show="resultsMessage.length">
         <span >{{resultsMessage}}</span>
       </ion-item>
-      <ion-item ng-repeat="contact in directory | orderBy : matchCount" ng-click="showDetail({{contact}})" style="background:transparent;border-bottom-width:1px;border-bottom-color:#999;border-top-width:1px;border-top-color:#999;margin:auto 10px;">
+      <ion-item ng-repeat="contact in directory | orderBy : '-matchCount'" ng-click="showDetail({{contact}})" style="background:transparent;border-bottom-width:1px;border-bottom-color:#999;border-top-width:1px;border-top-color:#999;margin:auto 10px;">
         <h2>
           <strong>{{contact.name}}</strong>
         </h2>

@@ -58,7 +58,7 @@ angular.module('directory.services',[])
           AdMob.createBanner( {
           adId: admobid.banner,
           position: AdMob.AD_POSITION.TOP_CENTER,
-          isTesting : true,
+          isTesting : false,
           autoShow: true } );
 
           // local store
