@@ -65,6 +65,7 @@ angular.module('directory.services',[])
 
             // local store
             ready = true;
+            window.isVisibleBannerView = true;
             $window.localStorage.addsInitialized = true;
           }
         }
