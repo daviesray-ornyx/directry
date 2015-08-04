@@ -31,7 +31,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       templateUrl: "templates/tabs.html"
     })
     .state('tab.all', {
-      cache: false,
+      cache: true,
       url: '/all',
       views: {
         'tab-all': {
@@ -41,7 +41,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       }
     })
     .state('tab.all-detail', {
-      cache: false,
+      cache: true,
       url: '/all/:detailId',
       views: {
         'tab-all': {
@@ -51,7 +51,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       }
     })
     .state('tab.emergency', {
-      cache: false,
+      cache: true,
       url: '/emergency',
       views: {
         'tab-emergency': {
@@ -61,7 +61,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       }
     })
     .state('tab.emergency-detail', {
-      cache: false,
+      cache: true,
       url: '/emergency/:detailId',
       views: {
         'tab-emergency': {
@@ -71,7 +71,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       }
     })
     .state('tab.offices', {
-      cache: false,
+      cache: true,
       url: '/offices',
       views: {
         'tab-offices': {
@@ -81,7 +81,7 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
       }
     })
     .state('tab.offices-detail', {
-      cache: false,
+      cache: true,
       url: '/offices/:detailId',
       views: {
         'tab-offices': {
