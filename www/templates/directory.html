@@ -1,9 +1,9 @@
-<ion-view >
-  <ion-content>
+<ion-view>
+  <ion-content >
     <div class="item top-wrapper">
       <a class="item item-icon-right temp-header" href="#" >
-        EMERGENCY
-        <span style="float:right;" ng-click="updateDirectory()">Update Directory</span>
+        THE KE DIRECTORY
+        <span style="float:right;" ng-click="updateDirectory()">Update</span>
         <i class="icon ion-ios-cloud-download-outline" ng-click="updateDirectory()"></i>
       </a>
 
@@ -25,18 +25,16 @@
     </div>
 
     <ion-list ng-hide="showSearchPrompt()">
-      <ion-item ng-repeat="contact in directory" ng-click="showDetail({{contact}})" >
+      <ion-item ng-repeat="contact in directory | orderBy : matchCount" ng-click="showDetail({{contact}})" >
         <h2>
           <strong>{{contact.name}}</strong>
         </h2>
         <p>{{contact.address}}</p>
       </ion-item>
-      <div class="center-div " ng-show="{{stillMoreContacts}}" style="margin:10px !important; padding:10px !mportant;" ng-click="loadMore()">
-        <span class="white-text background-theme-color" style="border: solid 5px #0D6759;">{{loadButtonText}}</span>
-      </div>
     </ion-list>
     <div ng-show="showSearchPrompt()" style="text-align:center;margin-top:25px;">
       <span>{{noContactMessage}} </span>
     </div>
+
   </ion-content>
 </ion-view>

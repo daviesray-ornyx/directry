@@ -25,71 +25,26 @@ angular.module('directry', ['ionic', 'directory.controllers', 'directory.service
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider){
   $ionicConfigProvider.tabs.position('bottom'); // other values: top
   $stateProvider
-    .state('tab', {
-      url: "/tab",
-      abstract: true,
-      templateUrl: "templates/tabs.html"
-    })
-    .state('tab.all', {
+    .state('directory', {
       cache: true,
-      url: '/all',
+      url: '/directory',
       views: {
-        'tab-all': {
-          templateUrl: 'templates/tab-all.html',
-          controller: 'DirectoryAllCtrl'
+        'main-view': {
+          templateUrl: 'templates/directory.html',
+          controller: 'DirectoryCtrl'
         }
       }
     })
-    .state('tab.all-detail', {
+    .state('directory/detail', {
       cache: true,
-      url: '/all/:detailId',
+      url: '/directory/detail',
       views: {
-        'tab-all': {
-          templateUrl: 'templates/tab-all-detail.html',
-          controller: 'DirectoryAllDetailCtrl'
+        'main-view': {
+          templateUrl: 'templates/directory-detail.html',
+          controller: 'DirectoryDetailCtrl'
         }
       }
     })
-    .state('tab.emergency', {
-      cache: true,
-      url: '/emergency',
-      views: {
-        'tab-emergency': {
-          templateUrl: 'templates/tab-emergency.html',
-          controller: 'DirectoryEmergencyCtrl'
-        }
-      }
-    })
-    .state('tab.emergency-detail', {
-      cache: true,
-      url: '/emergency/:detailId',
-      views: {
-        'tab-emergency': {
-          templateUrl: 'templates/tab-emergency-detail.html',
-          controller: 'DirectoryEmergencyDetailCtrl'
-        }
-      }
-    })
-    .state('tab.offices', {
-      cache: true,
-      url: '/offices',
-      views: {
-        'tab-offices': {
-          templateUrl: 'templates/tab-offices.html',
-          controller: 'DirectoryOfficesCtrl'
-        }
-      }
-    })
-    .state('tab.offices-detail', {
-      cache: true,
-      url: '/offices/:detailId',
-      views: {
-        'tab-offices': {
-          templateUrl: 'templates/tab-offices-detail.html',
-          controller: 'DirectoryOfficesDetailCtrl'
-        }
-      }
-    })
-    // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/emergency');
+// if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/directory');
 })
