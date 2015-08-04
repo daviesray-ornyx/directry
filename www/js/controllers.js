@@ -61,9 +61,18 @@ angular.module('directory.controllers', ['directory.services'])
     }
   }
 
-  $scope.resetSearchAll = function(sTerm){
+  $scope.resetSearch = function(){  // Resets everything
     $scope.directory = [];
     $scope.searchTerm.text = "";
+    $scope.searchTerm.location = "";
+  }
+
+  $scope.resetLocation = function(){  // resets location only and refines the search
+    $scope.directory = [];
+    $scope.searchTerm.county = "";
+
+    $scope.searchAll();
+
   }
 
   $scope.fullProfileImagePath = function(name){

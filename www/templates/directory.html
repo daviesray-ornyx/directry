@@ -7,14 +7,16 @@
         <i class="icon ion-ios-cloud-download-outline" ng-click="updateDirectory()"></i>
       </a>
 
-      <div class="bar  item-input-inset" style="background:transparent;border:none;">
+      <div class="bar item-input-inset" style="background:transparent;border:none;">
         <div class="item-input-wrapper">
           <input type="search" placeholder="Name e.g. Kenyatta National Hospital" ng-model="searchTerm.text">
+          <i class="icon ion-close-round placeholder-icon" ng-show="searchTerm.text.length" ng-click="resetSearch()"></i>
         </div>
       </div>
       <div class="bar item-input-inset" style="background:transparent;border:none;">
         <div class="item-input-wrapper">
           <input type="search" placeholder="County e.g. Nairobi" ng-model="searchTerm.county">
+          <i class="icon ion-close-round placeholder-icon" ng-show="searchTerm.county.length" ng-click="resetLocation()"></i>
         </div>
       </div>
       <div class="bar item-input-inset" style="background:transparent;border:none;">
@@ -24,7 +26,7 @@
       </div>
     </div>
 
-    <ion-list ng-hide="showSearchPrompt()">
+    <ion-list>
       <ion-item ng-repeat="contact in directory | orderBy : matchCount" ng-click="showDetail({{contact}})" >
         <h2>
           <strong>{{contact.name}}</strong>
@@ -32,9 +34,5 @@
         <p>{{contact.address}}</p>
       </ion-item>
     </ion-list>
-    <div ng-show="showSearchPrompt()" style="text-align:center;margin-top:25px;">
-      <span>{{noContactMessage}} </span>
-    </div>
-
   </ion-content>
 </ion-view>
