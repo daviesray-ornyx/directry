@@ -59,6 +59,7 @@ angular.module('directory.services',[])
           isTesting : true,
           autoShow: true } );
 
+          AdMob.showBanner(); // to show banner
           // local store
           window.isVisibleBannerView = true;
           $window.localStorage.addsInitialized = true;
