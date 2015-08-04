@@ -3,6 +3,7 @@ angular.module('directory.services',[])
     var base = "http://directry-serv.azurewebsites.net";    // production
     //var base = "http://localhost:9804";    // development
 
+    
 
     var allLoaded = false;
     var allContactProfiles = [];

@@ -11,13 +11,6 @@ angular.module('directory.controllers', ['directory.services'])
 
   $scope.updateDate = $rootScope.getUpdateDate();
 
-  // check for update date... if equals never, display modal to pull latest content
-  if($scope.updateDate == ': Never'){
-    // propmt for update
-    //$rootScope.notify("You have not synced your directory. Pull content to sync..");
-  }
-
-
   $scope.searchAll = function(){
     if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
@@ -44,7 +37,7 @@ angular.module('directory.controllers', ['directory.services'])
     }
     else{
       // Rootscope not up to date... Sync
-      $rootScope.show("Updating Directory from Server...")
+      $rootScope.show("Synchronizing Directory....")
       API.updateDirectory({})
       .success(function(dirObject){
         $rootScope.setProfileList(dirObject.profileList);
@@ -95,6 +88,9 @@ angular.module('directory.controllers', ['directory.services'])
     $window.location.href = ("#/directory/detail");
   }
 
+  if($scope.updateDate == ': Never'){
+    $scope.updateDirectory(); // Update directory if never updated... Else user has option to sync or not
+  }
   // Initialize add
   if(!window.isVisibleBannerView)
     $rootScope.initializeAdd();
@@ -114,7 +110,7 @@ angular.module('directory.controllers', ['directory.services'])
   $scope.goBack = function(){
     if(!window.isVisibleBannerView)
       $rootScope.initializeAdd();
-      
+
     if($ionicHistory.backView()){ // Not initial load..
       $ionicHistory.goBack(-1);
     }
